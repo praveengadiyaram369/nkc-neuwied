@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neuwieder Kanu-Club e.V. – Paddeln am Rhein</title>
+  <meta name="description" content="Der Neuwieder Kanu-Club e.V. – Paddeln, Gemeinschaft und Natur am Rhein. Für Anfänger, Familien, Jugendliche und erfahrene Sportler." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; color: #1a2634; background: #fff; overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    :root {
+      --blue: #1a5f7a; --blue-dark: #0d3d52; --blue-mid: #2a8aad;
+      --gold: #b8892e; --gold-lt: #d4a44a;
+      --sand: #f7f2ea; --white: #fff; --text: #1a2634; --muted: #607080;
+      --nav-h: 80px;
+    }
+    ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:#f0f4f6}::-webkit-scrollbar-thumb{background:var(--blue-mid);border-radius:3px}
+
+    /* NAV */
+    nav { position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 3rem;transition:background .4s,box-shadow .4s; }
+    nav.scrolled { background:rgba(13,61,82,.97);box-shadow:0 2px 30px rgba(0,0,0,.25);backdrop-filter:blur(8px); }
+    .nav-logo { font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:#fff;letter-spacing:.03em;display:flex;align-items:center;gap:.5rem; }
+    .nav-logo em { color:var(--gold-lt);font-style:italic; }
+    .nav-links { display:flex;gap:2.2rem;list-style:none; }
+    .nav-links a { color:rgba(255,255,255,.88);font-size:.82rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;transition:color .2s; }
+    .nav-links a:hover { color:var(--gold-lt); }
+    .nav-cta { background:var(--gold);color:#fff !important;padding:.55rem 1.4rem;border-radius:1px;font-weight:500 !important; }
+    .nav-cta:hover { background:var(--gold-lt) !important; }
+    .hamburger { display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px; }
+    .hamburger span { width:26px;height:2px;background:#fff;transition:all .3s;border-radius:1px; }
+    .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .hamburger.open span:nth-child(2){opacity:0}
+    .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .mobile-menu { display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(13,61,82,.98);padding:2rem;flex-direction:column;gap:1.5rem;z-index:999; }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a { color:rgba(255,255,255,.9);font-size:1rem;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:1rem; }
+
+    /* HERO */
+    .hero { position:relative;height:100vh;min-height:600px;overflow:hidden; }
+    .slide { position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s ease; }
+    .slide.active { opacity:1; }
+    .slide::after { content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,35,50,.45) 0%,rgba(10,35,50,.15) 40%,rgba(10,35,50,.6) 100%); }
+    .slide-1 { background-image:url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1920&q=85'); }
+    .slide-2 { background-image:url('https://images.unsplash.com/photo-1571988840298-3b5301d5109b?w=1920&q=85'); }
+    .slide-3 { background-image:url('https://images.unsplash.com/photo-1530866787565-0b612e61eab5?w=1920&q=85'); }
+    .slide-4 { background-image:url('https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=1920&q=85'); }
+    .hero-content { position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 2rem; }
+    .hero-eyebrow { font-size:.78rem;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-lt);margin-bottom:1.2rem;opacity:0;animation:fadeUp 1s .4s forwards; }
+    .hero-title { font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,8vw,6.5rem);font-weight:600;color:#fff;line-height:1.08;margin-bottom:1.4rem;opacity:0;animation:fadeUp 1s .7s forwards; }
+    .hero-title em { font-style:italic;color:var(--gold-lt); }
+    .hero-sub { font-size:clamp(1rem,2vw,1.2rem);font-weight:300;color:rgba(255,255,255,.85);max-width:560px;margin-bottom:2.4rem;opacity:0;animation:fadeUp 1s 1s forwards; }
+    .hero-btns { display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;opacity:0;animation:fadeUp 1s 1.2s forwards; }
+    .slide-dots { position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:3;display:flex;gap:.7rem; }
+    .dot { width:28px;height:2px;background:rgba(255,255,255,.4);border-radius:1px;cursor:pointer;transition:background .3s,width .3s; }
+    .dot.active { background:var(--gold-lt);width:48px; }
+    .slide-arrows { position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:100%;display:flex;justify-content:space-between;padding:0 1.5rem;pointer-events:none; }
+    .arrow { pointer-events:all;cursor:pointer;width:48px;height:48px;border:1.5px solid rgba(255,255,255,.5);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;transition:all .25s;background:rgba(0,0,0,.15);backdrop-filter:blur(4px); }
+    .arrow:hover { background:var(--gold);border-color:var(--gold);transform:scale(1.08); }
+    .scroll-hint { position:absolute;bottom:2.5rem;right:3rem;z-index:3;display:flex;flex-direction:column;align-items:center;gap:.5rem;color:rgba(255,255,255,.6);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase; }
+    .scroll-line { width:1px;height:48px;background:linear-gradient(to bottom,rgba(255,255,255,.6),transparent);animation:scrollPulse 2s ease infinite; }
+
+    /* BTN */
+    .btn { display:inline-block;padding:.85rem 2.4rem;font-family:'Jost',sans-serif;font-size:.82rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;border-radius:1px;cursor:pointer;transition:all .25s;border:none; }
+    .btn-gold { background:var(--gold);color:#fff;border:1.5px solid var(--gold); }
+    .btn-gold:hover { background:var(--gold-lt);border-color:var(--gold-lt);transform:translateY(-2px);box-shadow:0 8px 24px rgba(184,137,46,.4); }
+    .btn-ghost { background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.7); }
+    .btn-ghost:hover { background:rgba(255,255,255,.12);transform:translateY(-2px); }
+    .btn-blue { background:var(--blue);color:#fff;border:1.5px solid var(--blue); }
+    .btn-blue:hover { background:var(--blue-dark);border-color:var(--blue-dark);transform:translateY(-2px); }
+
+    /* QUICKLINKS */
+    .quicklinks { background:var(--blue-dark);display:grid;grid-template-columns:repeat(4,1fr); }
+    .ql-item { padding:2rem 1.5rem;display:flex;align-items:center;gap:1rem;border-right:1px solid rgba(255,255,255,.08);cursor:pointer;transition:background .25s; }
+    .ql-item:last-child { border-right:none; }
+    .ql-item:hover { background:rgba(255,255,255,.06); }
+    .ql-icon { font-size:1.8rem;flex-shrink:0; }
+    .ql-text strong { display:block;font-size:.9rem;font-weight:500;color:#fff;letter-spacing:.04em;margin-bottom:.2rem; }
+    .ql-text span { font-size:.78rem;color:rgba(255,255,255,.5);font-weight:300; }
+
+    /* SECTION */
+    .section { padding:6rem 0; }
+    .container { max-width:1160px;margin:0 auto;padding:0 2rem; }
+    .section-label { font-size:.72rem;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem; }
+    .section-title { font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:600;line-height:1.15;color:var(--text);margin-bottom:1.2rem; }
+    .section-title em { font-style:italic;color:var(--blue); }
+    .section-body { font-size:1.05rem;font-weight:300;color:var(--muted);max-width:560px;line-height:1.8; }
+
+    /* WELCOME */
+    .welcome-grid { display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center; }
+    .welcome-imgs { position:relative;height:520px; }
+    .welcome-img-main { position:absolute;top:0;left:0;width:75%;height:80%;object-fit:cover;border-radius:2px;box-shadow:0 20px 60px rgba(26,95,122,.2); }
+    .welcome-img-accent { position:absolute;bottom:0;right:0;width:55%;height:55%;object-fit:cover;border-radius:2px;box-shadow:0 12px 40px rgba(26,95,122,.18);border:5px solid #fff; }
+    .welcome-badge { position:absolute;top:52%;left:62%;transform:translate(-50%,-50%);z-index:2;background:var(--blue-dark);color:#fff;width:110px;height:110px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.3); }
+    .welcome-badge strong { font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;line-height:1;color:var(--gold-lt); }
+    .welcome-badge span { font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;opacity:.8;margin-top:.2rem; }
+
+    /* STATS */
+    .stats { background:var(--sand);padding:4rem 0; }
+    .stats-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center; }
+    .stat-num { font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:700;color:var(--blue);line-height:1;margin-bottom:.4rem; }
+    .stat-label { font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted); }
+
+    /* ACTIVITIES */
+    .activities-header { text-align:center;margin-bottom:4rem; }
+    .activities-header .section-body { margin:0 auto; }
+    .act-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:3px; }
+    .act-card { position:relative;height:440px;overflow:hidden;cursor:pointer; }
+    .act-card img { width:100%;height:100%;object-fit:cover;transition:transform .6s ease; }
+    .act-card:hover img { transform:scale(1.06); }
+    .act-card::after { content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(10,35,50,.85) 0%,rgba(10,35,50,.1) 55%);transition:opacity .3s; }
+    .act-card:hover::after { opacity:.95; }
+    .act-info { position:absolute;bottom:0;left:0;right:0;z-index:2;padding:2rem 1.8rem; }
+    .act-tag { font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-lt);margin-bottom:.5rem; }
+    .act-name { font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:#fff;line-height:1.2;margin-bottom:.6rem; }
+    .act-desc { font-size:.88rem;font-weight:300;color:rgba(255,255,255,.75);line-height:1.6;max-height:0;overflow:hidden;transition:max-height .4s ease; }
+    .act-card:hover .act-desc { max-height:80px; }
+
+    /* PARALLAX */
+    .parallax-cta { position:relative;height:520px;background-image:url('https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=1920&q=85');background-size:cover;background-attachment:fixed;background-position:center;display:flex;align-items:center;justify-content:center;text-align:center; }
+    .parallax-cta::after { content:'';position:absolute;inset:0;background:rgba(13,61,82,.65); }
+    .parallax-cta-content { position:relative;z-index:2;padding:2rem; }
+    .parallax-cta-content h2 { font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,4.2rem);font-weight:600;color:#fff;margin-bottom:1.5rem;line-height:1.15; }
+    .parallax-cta-content h2 em { font-style:italic;color:var(--gold-lt); }
+    .parallax-cta-content .section-label { color:var(--gold-lt); }
+
+    /* EVENTS */
+    .events { background:var(--sand); }
+    .events-header { margin-bottom:3rem; }
+    .events-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem; }
+    .event-card { background:#fff;border-radius:2px;overflow:hidden;box-shadow:0 4px 20px rgba(26,95,122,.08);transition:transform .3s,box-shadow .3s; }
+    .event-card:hover { transform:translateY(-6px);box-shadow:0 12px 40px rgba(26,95,122,.14); }
+    .event-img { height:200px;overflow:hidden; }
+    .event-img img { width:100%;height:100%;object-fit:cover;transition:transform .5s; }
+    .event-card:hover .event-img img { transform:scale(1.05); }
+    .event-body { padding:1.5rem; }
+    .event-date { font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem; }
+    .event-title { font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--text);margin-bottom:.6rem; }
+    .event-desc { font-size:.88rem;font-weight:300;color:var(--muted);line-height:1.6; }
+
+    /* GALLERY */
+    .gallery-strip { display:grid;grid-template-columns:repeat(6,1fr);gap:4px; }
+    .gallery-strip a { display:block;height:220px;overflow:hidden;position:relative; }
+    .gallery-strip a::after { content:'';position:absolute;inset:0;background:rgba(26,95,122,.4);opacity:0;transition:opacity .3s; }
+    .gallery-strip a:hover::after { opacity:1; }
+    .gallery-strip img { width:100%;height:100%;object-fit:cover;transition:transform .5s; }
+    .gallery-strip a:hover img { transform:scale(1.08); }
+
+    /* MEMBERSHIP */
+    .membership { background:var(--blue-dark);padding:6rem 0; }
+    .membership-grid { display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center; }
+    .membership .section-title { color:#fff; }
+    .membership .section-label { color:var(--gold-lt); }
+    .membership .section-body { color:rgba(255,255,255,.7); }
+    .member-list { margin-top:2rem;display:flex;flex-direction:column;gap:1rem; }
+    .member-item { display:flex;align-items:flex-start;gap:1rem;color:rgba(255,255,255,.85);font-size:.95rem;font-weight:300; }
+    .member-check { color:var(--gold-lt);font-size:1rem;flex-shrink:0;margin-top:2px; }
+    .member-btns { display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap; }
+    .fee-card { background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:2px;padding:2rem; }
+    .fee-title { font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:#fff;margin-bottom:1.5rem; }
+    .fee-row { display:flex;justify-content:space-between;align-items:center;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.75);font-weight:300;font-size:.95rem; }
+    .fee-row:last-child { border-bottom:none; }
+    .fee-amount { color:var(--gold-lt);font-weight:500;font-size:1.05rem; }
+
+    /* LOCATION */
+    .location-grid { display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start; }
+    .map-frame { width:100%;height:400px;border-radius:2px;overflow:hidden;box-shadow:0 12px 40px rgba(26,95,122,.15); }
+    .map-frame iframe { width:100%;height:100%;border:0; }
+    .location-details { display:flex;flex-direction:column;gap:1.8rem;margin-top:2rem; }
+    .loc-item { display:flex;gap:1.2rem;align-items:flex-start; }
+    .loc-icon { font-size:1.4rem;flex-shrink:0;margin-top:2px; }
+    .loc-label { font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem; }
+    .loc-value { font-size:.98rem;color:var(--text);font-weight:300;line-height:1.6; }
+
+    /* FOOTER */
+    footer { background:#07232f;padding:4rem 0 2rem; }
+    .footer-grid { display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem; }
+    .footer-brand { font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff;margin-bottom:1rem; }
+    .footer-brand em { color:var(--gold-lt);font-style:italic; }
+    .footer-desc { font-size:.88rem;font-weight:300;color:rgba(255,255,255,.5);line-height:1.8; }
+    .footer-col h4 { font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem; }
+    .footer-links { list-style:none;display:flex;flex-direction:column;gap:.7rem; }
+    .footer-links a { font-size:.88rem;font-weight:300;color:rgba(255,255,255,.5);transition:color .2s; }
+    .footer-links a:hover { color:var(--gold-lt); }
+    .footer-bottom { border-top:1px solid rgba(255,255,255,.08);padding-top:2rem;display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:rgba(255,255,255,.35);font-weight:300; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes scrollPulse { 0%,100%{opacity:.6;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.2)} }
+    .reveal { opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease; }
+    .reveal.visible { opacity:1;transform:translateY(0); }
+    .reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}
+    .reveal-delay-3{transition-delay:.3s}.reveal-delay-4{transition-delay:.4s}
+
+    /* RESPONSIVE */
+    @media(max-width:1024px){
+      .welcome-grid,.membership-grid,.location-grid{grid-template-columns:1fr;gap:3rem}
+      .act-grid{grid-template-columns:1fr 1fr}
+      .act-card:nth-child(3){grid-column:span 2;height:320px}
+      .welcome-imgs{height:380px}
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:768px){
+      :root{--nav-h:68px}
+      nav{padding:0 1.5rem}
+      .nav-links,.scroll-hint{display:none}
+      .hamburger{display:flex}
+      .quicklinks{grid-template-columns:1fr 1fr}
+      .act-grid{grid-template-columns:1fr}
+      .act-card:nth-child(3){grid-column:span 1;height:360px}
+      .events-grid{grid-template-columns:1fr}
+      .gallery-strip{grid-template-columns:repeat(3,1fr)}
+      .stats-grid{grid-template-columns:repeat(2,1fr)}
+      .footer-grid{grid-template-columns:1fr}
+      .footer-bottom{flex-direction:column;gap:.5rem;text-align:center}
+      .parallax-cta{background-attachment:scroll}
+    }
+    @media(max-width:480px){
+      .quicklinks{grid-template-columns:1fr}
+      .gallery-strip{grid-template-columns:repeat(2,1fr)}
+      .hero-btns{flex-direction:column;align-items:center}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">🛶 Neuwieder <em>Kanu-Club</em></div>
+  <ul class="nav-links">
+    <li><a href="#willkommen">Über uns</a></li>
+    <li><a href="#aktivitaeten">Aktivitäten</a></li>
+    <li><a href="#termine">Termine</a></li>
+    <li><a href="#mitglied">Mitglied</a></li>
+    <li><a href="#anfahrt">Anfahrt</a></li>
+    <li><a href="#kontakt" class="nav-cta">Kontakt</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#willkommen" onclick="closeMenu()">Über uns</a>
+  <a href="#aktivitaeten" onclick="closeMenu()">Aktivitäten</a>
+  <a href="#termine" onclick="closeMenu()">Termine</a>
+  <a href="#mitglied" onclick="closeMenu()">Mitglied werden</a>
+  <a href="#anfahrt" onclick="closeMenu()">Anfahrt</a>
+  <a href="#kontakt" onclick="closeMenu()">Kontakt</a>
+</div>
+
+<!-- HERO SLIDER -->
+<section class="hero">
+  <div class="slide slide-1 active"></div>
+  <div class="slide slide-2"></div>
+  <div class="slide slide-3"></div>
+  <div class="slide slide-4"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Neuwied am Rhein · Mitglied im Kanuverband Rheinland</p>
+    <h1 class="hero-title">Padde los.<br>Der <em>Rhein</em> ruft.</h1>
+    <p class="hero-sub">Erlebe Natur, Gemeinschaft und den Kanusport am schönsten Fluss Deutschlands — für jedes Alter und jedes Können.</p>
+    <div class="hero-btns">
+      <a href="#mitglied" class="btn btn-gold">Mitglied werden</a>
+      <a href="#willkommen" class="btn btn-ghost">Mehr erfahren</a>
+    </div>
+  </div>
+  <div class="slide-dots" id="dots"></div>
+  <div class="slide-arrows">
+    <div class="arrow" onclick="prevSlide()">&#8592;</div>
+    <div class="arrow" onclick="nextSlide()">&#8594;</div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- QUICK LINKS -->
+<div class="quicklinks">
+  <a href="#aktivitaeten" class="ql-item">
+    <div class="ql-icon">🚣</div>
+    <div class="ql-text"><strong>Kanu &amp; Kajak</strong><span>Kurse &amp; freies Paddeln</span></div>
+  </a>
+  <a href="#termine" class="ql-item">
+    <div class="ql-icon">📅</div>
+    <div class="ql-text"><strong>Jahresprogramm</strong><span>Touren &amp; Veranstaltungen</span></div>
+  </a>
+  <a href="#mitglied" class="ql-item">
+    <div class="ql-icon">🤝</div>
+    <div class="ql-text"><strong>Mitglied werden</strong><span>Jetzt dem Club beitreten</span></div>
+  </a>
+  <a href="#anfahrt" class="ql-item">
+    <div class="ql-icon">📍</div>
+    <div class="ql-text"><strong>Bootshaus finden</strong><span>Rheinstr. 56, Neuwied</span></div>
+  </a>
+</div>
+
+<!-- WELCOME -->
+<section class="section" id="willkommen" style="background:#fff">
+  <div class="container">
+    <div class="welcome-grid">
+      <div class="welcome-imgs reveal">
+        <img class="welcome-img-main"
+          src="https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=900&q=85"
+          alt="Paddeln auf dem Rhein" />
+        <img class="welcome-img-accent"
+          src="https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=600&q=85"
+          alt="Kanugemeinschaft" />
+        <div class="welcome-badge">
+          <strong>100+</strong>
+          <span>Jahre<br>Paddeln</span>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <p class="section-label">Willkommen beim NKC Neuwied</p>
+        <h2 class="section-title">Dein Zuhause<br>am <em>Rhein</em>.</h2>
+        <p class="section-body">Wir sind ein aktiver Sportverein direkt am Rheinufer in Neuwied — Mitglied im Kanuverband Rheinland. Bei uns paddeln Anfänger, Familien, Jugendliche und erfahrene Sportler gemeinsam auf einem der schönsten Flüsse Deutschlands.</p>
+        <p class="section-body" style="margin-top:1rem">Unser Bootshaus liegt direkt am Pegelturm, Rhein-km 608. Komm einfach vorbei — wir freuen uns auf dich!</p>
+        <a href="#mitglied" class="btn btn-blue" style="margin-top:2rem;display:inline-block">Jetzt Mitglied werden →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="reveal"><div class="stat-num">100+</div><div class="stat-label">Aktive Mitglieder</div></div>
+      <div class="reveal reveal-delay-1"><div class="stat-num">20+</div><div class="stat-label">Touren pro Jahr</div></div>
+      <div class="reveal reveal-delay-2"><div class="stat-num">4</div><div class="stat-label">Altersgruppen</div></div>
+      <div class="reveal reveal-delay-3"><div class="stat-num">Rhein</div><div class="stat-label">Direkt am Wasser</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ACTIVITIES -->
+<section class="section" id="aktivitaeten" style="background:#fff">
+  <div class="container">
+    <div class="activities-header reveal">
+      <p class="section-label">Was wir bieten</p>
+      <h2 class="section-title">Für jeden<br>ist etwas <em>dabei</em>.</h2>
+      <p class="section-body">Vom ersten Paddelkurs bis zur mehrtägigen Rhein-Expedition — unser Programm begeistert jedes Alter.</p>
+    </div>
+  </div>
+  <div class="act-grid">
+    <div class="act-card reveal">
+      <img src="https://images.unsplash.com/photo-1502933691298-84fc14542831?w=800&q=85" alt="Anfängerkurs" loading="lazy"/>
+      <div class="act-info">
+        <p class="act-tag">Für Einsteiger</p>
+        <h3 class="act-name">Kanu &amp;<br>Kajak Kurse</h3>
+        <p class="act-desc">Noch nie gepaddelt? Kein Problem. Unsere Trainer bringen dir die Grundlagen bei — sicher, entspannt und mit viel Spaß.</p>
+      </div>
+    </div>
+    <div class="act-card reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1530866787565-0b612e61eab5?w=800&q=85" alt="Familie" loading="lazy"/>
+      <div class="act-info">
+        <p class="act-tag">Familien &amp; Kinder</p>
+        <h3 class="act-name">Jugend &amp;<br>Familie</h3>
+        <p class="act-desc">Unser Jugendprogramm macht Kindern den Einstieg leicht. Eltern paddeln, Kinder wachsen — gemeinsam auf dem Rhein.</p>
+      </div>
+    </div>
+    <div class="act-card reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1571988840298-3b5301d5109b?w=800&q=85" alt="Gruppentouren" loading="lazy"/>
+      <div class="act-info">
+        <p class="act-tag">Gemeinschaft &amp; Sport</p>
+        <h3 class="act-name">Touren &amp;<br>Regatten</h3>
+        <p class="act-desc">Von Tagestouren auf dem Rhein bis zu Regatten im Kanuverband — bei uns ist immer etwas los.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARALLAX CTA -->
+<div class="parallax-cta">
+  <div class="parallax-cta-content">
+    <p class="section-label">Bereit für dein Abenteuer?</p>
+    <h2>Erlebe den Rhein<br>von seiner <em>schönsten</em> Seite.</h2>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="#mitglied" class="btn btn-gold">Jetzt beitreten</a>
+      <a href="#kontakt" class="btn btn-ghost">Schreib uns</a>
+    </div>
+  </div>
+</div>
+
+<!-- EVENTS -->
+<section class="section events" id="termine">
+  <div class="container">
+    <div class="events-header reveal">
+      <p class="section-label">Aktuell</p>
+      <h2 class="section-title">Termine &amp;<br><em>Veranstaltungen</em></h2>
+      <p class="section-body">Hier findest du immer die neuesten Touren, Trainings und Club-Events.</p>
+    </div>
+    <div class="events-grid">
+      <div class="event-card reveal">
+        <div class="event-img"><img src="https://images.unsplash.com/photo-1534470397-4b7fd39c17fb?w=600&q=80" alt="Rheintour" loading="lazy"/></div>
+        <div class="event-body">
+          <p class="event-date">Nächster Termin · Rhein</p>
+          <h3 class="event-title">Rheintour Braubach – Neuwied</h3>
+          <p class="event-desc">Treffpunkt 9 Uhr Bootshaus. Infos &amp; Anmeldung beim 1. Vorsitzenden.</p>
+        </div>
+      </div>
+      <div class="event-card reveal reveal-delay-1">
+        <div class="event-img"><img src="https://images.unsplash.com/photo-1526080652727-5b77f74eacd2?w=600&q=80" alt="Seniorentour" loading="lazy"/></div>
+        <div class="event-body">
+          <p class="event-date">Mehrtägig · Sommer</p>
+          <h3 class="event-title">Seniorentour 2025</h3>
+          <p class="event-desc">Mehrtägige Paddeltour für unsere erfahrenen Mitglieder. Entspannt, gemütlich, unvergesslich.</p>
+        </div>
+      </div>
+      <div class="event-card reveal reveal-delay-2">
+        <div class="event-img"><img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80" alt="CleanUp" loading="lazy"/></div>
+        <div class="event-body">
+          <p class="event-date">Herbst · Gemeinschaft</p>
+          <h3 class="event-title">CleanUp-Day am Rhein</h3>
+          <p class="event-desc">Paddeln und gleichzeitig etwas für unseren Fluss tun. Mitmachen lohnt sich!</p>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:3rem" class="reveal">
+      <a href="#kontakt" class="btn btn-blue">Alle Termine anfragen</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<div class="gallery-strip">
+  <a href="#"><img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&q=80" alt="Kanu" loading="lazy"/></a>
+  <a href="#"><img src="https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=400&q=80" alt="Paddeln" loading="lazy"/></a>
+  <a href="#"><img src="https://images.unsplash.com/photo-1530866787565-0b612e61eab5?w=400&q=80" alt="Rhein" loading="lazy"/></a>
+  <a href="#"><img src="https://images.unsplash.com/photo-1502933691298-84fc14542831?w=400&q=80" alt="Gruppe" loading="lazy"/></a>
+  <a href="#"><img src="https://images.unsplash.com/photo-1571988840298-3b5301d5109b?w=400&q=80" alt="Natur" loading="lazy"/></a>
+  <a href="#"><img src="https://images.unsplash.com/photo-1519399657493-a616a3b2a9f0?w=400&q=80" alt="Wasser" loading="lazy"/></a>
+</div>
+
+<!-- MEMBERSHIP -->
+<section class="membership" id="mitglied">
+  <div class="container">
+    <div class="membership-grid">
+      <div class="reveal">
+        <p class="section-label">Jetzt mitmachen</p>
+        <h2 class="section-title">Werde Teil<br>unserer <em>Familie</em>.</h2>
+        <p class="section-body">Egal ob du gerade erst mit dem Paddeln anfängst oder schon Erfahrung hast — beim NKC Neuwied bist du herzlich willkommen.</p>
+        <ul class="member-list">
+          <li class="member-item"><span class="member-check">✦</span> Nutzung aller Vereinsboote &amp; Ausrüstung</li>
+          <li class="member-item"><span class="member-check">✦</span> Teilnahme an allen Touren &amp; Veranstaltungen</li>
+          <li class="member-item"><span class="member-check">✦</span> Kanu- und Kajakkurse für Einsteiger</li>
+          <li class="member-item"><span class="member-check">✦</span> Jugend- und Familienprogramm</li>
+          <li class="member-item"><span class="member-check">✦</span> Gemeinschaft am schönsten Fluss Deutschlands</li>
+          <li class="member-item"><span class="member-check">✦</span> Mitglied im Kanuverband Rheinland</li>
+        </ul>
+        <div class="member-btns">
+          <a href="mailto:1.Vorsitzender@nkc-neuwied.de" class="btn btn-gold">Jetzt beitreten</a>
+          <a href="mailto:1.Vorsitzender@nkc-neuwied.de" class="btn btn-ghost">Fragen stellen</a>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="fee-card">
+          <h3 class="fee-title">Mitgliedsbeiträge</h3>
+          <div class="fee-row"><span>Erwachsene</span><span class="fee-amount">Auf Anfrage</span></div>
+          <div class="fee-row"><span>Jugendliche (bis 18 J.)</span><span class="fee-amount">Ermäßigt</span></div>
+          <div class="fee-row"><span>Familien</span><span class="fee-amount">Familientarif</span></div>
+          <div class="fee-row"><span>Senioren</span><span class="fee-amount">Ermäßigt</span></div>
+          <p style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.1);font-size:.82rem;color:rgba(255,255,255,.5);font-weight:300;line-height:1.7">Genaue Beiträge auf Anfrage per E-Mail oder direkt beim Bootshaus.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="section" id="anfahrt" style="background:#fff">
+  <div class="container">
+    <div class="location-grid">
+      <div class="reveal">
+        <p class="section-label">So findest du uns</p>
+        <h2 class="section-title">Unser<br><em>Bootshaus</em>.</h2>
+        <p class="section-body">Direkt am Rheinufer, neben dem Pegelturm. Einfach vorbeikommen — du bist jederzeit willkommen.</p>
+        <div class="location-details">
+          <div class="loc-item">
+            <span class="loc-icon">📍</span>
+            <div><p class="loc-label">Adresse</p><p class="loc-value">Rheinstraße 56 · 56564 Neuwied<br>Rhein-km 608</p></div>
+          </div>
+          <div class="loc-item">
+            <span class="loc-icon">✉️</span>
+            <div><p class="loc-label">E-Mail</p><p class="loc-value"><a href="mailto:1.Vorsitzender@nkc-neuwied.de" style="color:var(--blue)">1.Vorsitzender@nkc-neuwied.de</a></p></div>
+          </div>
+          <div class="loc-item">
+            <span class="loc-icon">🌐</span>
+            <div><p class="loc-label">Website</p><p class="loc-value"><a href="https://www.nkc-neuwied.de" style="color:var(--blue)">www.nkc-neuwied.de</a></p></div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="map-frame">
+          <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=7.443,50.427,7.468,50.437&layer=mapnik&marker=50.432,7.456" title="NKC Neuwied Karte" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div id="kontakt" style="background:var(--sand);padding:5rem 0;text-align:center">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Kontakt</p>
+      <h2 class="section-title" style="margin-bottom:1rem">Wir freuen uns<br>auf deine <em>Nachricht</em>.</h2>
+      <p class="section-body" style="margin:0 auto 2.5rem">Fragen zum Verein, zu Kursen oder zum Mitgliedwerden? Schreib uns — wir melden uns schnell zurück.</p>
+      <a href="mailto:1.Vorsitzender@nkc-neuwied.de" class="btn btn-gold" style="font-size:.9rem;padding:1rem 3rem">✉️ &nbsp;1.Vorsitzender@nkc-neuwied.de</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Neuwieder <em>Kanu-Club</em> e.V.</div>
+        <p class="footer-desc">Mitglied im Kanuverband Rheinland. Paddeln, Gemeinschaft und Natur direkt am Rhein — in Neuwied.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="#willkommen">Über uns</a></li>
+          <li><a href="#aktivitaeten">Aktivitäten</a></li>
+          <li><a href="#termine">Termine</a></li>
+          <li><a href="#mitglied">Mitglied werden</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Verein</h4>
+        <ul class="footer-links">
+          <li><a href="#anfahrt">Anfahrt</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+          <li><a href="#">Impressum</a></li>
+          <li><a href="#">Datenschutz</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <ul class="footer-links">
+          <li><a href="mailto:1.Vorsitzender@nkc-neuwied.de">E-Mail schreiben</a></li>
+          <li><a href="#anfahrt">Rheinstr. 56, Neuwied</a></li>
+          <li><a href="#">Kanuverband Rheinland</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Neuwieder Kanu-Club e.V.</span>
+      <span><a href="#" style="color:rgba(255,255,255,.35)">Impressum</a> · <a href="#" style="color:rgba(255,255,255,.35)">Datenschutz</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Slider
+  const slides = document.querySelectorAll('.slide');
+  const dotsEl = document.getElementById('dots');
+  let cur = 0, timer;
+  slides.forEach((_,i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i===0?' active':'');
+    d.onclick = () => goTo(i);
+    dotsEl.appendChild(d);
+  });
+  function goTo(n) {
+    slides[cur].classList.remove('active');
+    dotsEl.children[cur].classList.remove('active');
+    cur = (n + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    dotsEl.children[cur].classList.add('active');
+    clearInterval(timer); timer = setInterval(nextSlide, 5500);
+  }
+  function nextSlide() { goTo(cur+1); }
+  function prevSlide() { goTo(cur-1); }
+  timer = setInterval(nextSlide, 5500);
+
+  // Navbar
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60));
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
+    nav.classList.add('scrolled');
+  }
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+  }
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth',block:'start'}); }
+    });
+  });
+</script>
+</body>
+</html>
