@@ -152,9 +152,10 @@ These things are NOT yet implemented and should be added:
 - [x] `datenschutz.html` — DONE
 - [x] `vorstand.html` — DONE (all 8 board members)
 - [x] `pegeldienste.html` — DONE (all German states)
-- [ ] `berichte.html` — Club news / trip reports (future)
-- [ ] `galerie.html` — Photo gallery page (future)
+- [ ] `berichte.html` — Club news (future, low priority)
+- [ ] Gallery — embed Instagram feed instead of separate page (future)
 - [ ] Real club photos (replace all Unsplash placeholders) — ask club
+- [x] Logo — transparent PNG (logo.png) used in nav and footer
 - [ ] Real membership fees in `#mitglied` section — ask Kassenwart
 - [ ] Real social media handles — replace `#` in footer with real URLs
 - [ ] `favicon.ico` — Browser tab icon (use club logo)

@@ -16,7 +16,8 @@ nkc-neuwied/
 ├── pegeldienste.html  ← Water level links by German state
 ├── impressum.html     ← Legal imprint (required in Germany)
 ├── datenschutz.html   ← Privacy policy / DSGVO
-├── logo.jpeg          ← Club logo (NKC pennant)
+├── logo.jpeg          ← Original logo (backup)
+├── logo.png           ← Transparent PNG logo (used in website)
 ├── README.md          ← This file — setup & maintenance guide
 └── AGENTS.md          ← AI assistant instructions for future updates
 ```
@@ -132,8 +133,8 @@ The current site is a single-page homepage. These pages are recommended for the 
 | Datenschutzerklärung | `datenschutz.html` | ✅ Done |
 | Vorstand | `vorstand.html` | ✅ Done |
 | Pegeldienste | `pegeldienste.html` | ✅ Done |
-| Berichte / News | `berichte.html` | 🟡 Future |
-| Galerie | `galerie.html` | 🟡 Future |
+| Berichte / News | `berichte.html` | 🟡 Future (or use Instagram embed) |
+| Galerie | `galerie.html` | 🟢 Future (or use Instagram feed) |
 
 > **Important for Germany:** You are legally required to have an **Impressum**
 > and a **Datenschutzerklärung** on your website. See AGENTS.md for how to
