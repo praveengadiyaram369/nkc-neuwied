@@ -11,9 +11,14 @@ Repository: [https://github.com/praveengadiyaram369/nkc-neuwied](https://github.
 
 ```
 nkc-neuwied/
-├── index.html        ← Main homepage (single file, all CSS + JS included)
-├── README.md         ← This file — setup & maintenance guide
-└── AGENTS.md         ← AI assistant instructions for future updates
+├── index.html         ← Main homepage
+├── vorstand.html      ← Board members / Vorstand
+├── pegeldienste.html  ← Water level links by German state
+├── impressum.html     ← Legal imprint (required in Germany)
+├── datenschutz.html   ← Privacy policy / DSGVO
+├── logo.jpeg          ← Club logo (NKC pennant)
+├── README.md          ← This file — setup & maintenance guide
+└── AGENTS.md          ← AI assistant instructions for future updates
 ```
 
 > **Note:** This is a single-page website. All content, styles, and scripts
@@ -123,12 +128,12 @@ The current site is a single-page homepage. These pages are recommended for the 
 
 | Page | File to create | Priority |
 |---|---|---|
-| Impressum | `impressum.html` | 🔴 High (legally required in Germany) |
-| Datenschutzerklärung | `datenschutz.html` | 🔴 High (DSGVO required) |
-| Jahresprogramm / Termine | `termine.html` | 🟡 Medium |
-| Berichte / News | `berichte.html` | 🟡 Medium |
-| Über uns / Vorstand | `ueber-uns.html` | 🟢 Low |
-| Galerie | `galerie.html` | 🟢 Low |
+| Impressum | `impressum.html` | ✅ Done |
+| Datenschutzerklärung | `datenschutz.html` | ✅ Done |
+| Vorstand | `vorstand.html` | ✅ Done |
+| Pegeldienste | `pegeldienste.html` | ✅ Done |
+| Berichte / News | `berichte.html` | 🟡 Future |
+| Galerie | `galerie.html` | 🟡 Future |
 
 > **Important for Germany:** You are legally required to have an **Impressum**
 > and a **Datenschutzerklärung** on your website. See AGENTS.md for how to

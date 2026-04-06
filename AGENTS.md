@@ -148,20 +148,18 @@ These are content ideas from the Kanu Club Mehlem that are relevant for NKC:
 
 These things are NOT yet implemented and should be added:
 
-- [ ] `impressum.html` — **LEGALLY REQUIRED** in Germany
-- [ ] `datenschutz.html` — **LEGALLY REQUIRED** (DSGVO)
-- [ ] `termine.html` — Full annual programme page
-- [ ] `berichte.html` — Club news / trip reports
-- [ ] `galerie.html` — Photo gallery page
-- [ ] `ueber-uns.html` — About / Vorstand page
-- [ ] Real club photos (replace all Unsplash placeholders)
-- [ ] Real membership fees in `#mitglied` section
-- [ ] Real social media handles in footer
-- [ ] Real founding year in stats section
+- [x] `impressum.html` — DONE
+- [x] `datenschutz.html` — DONE
+- [x] `vorstand.html` — DONE (all 8 board members)
+- [x] `pegeldienste.html` — DONE (all German states)
+- [ ] `berichte.html` — Club news / trip reports (future)
+- [ ] `galerie.html` — Photo gallery page (future)
+- [ ] Real club photos (replace all Unsplash placeholders) — ask club
+- [ ] Real membership fees in `#mitglied` section — ask Kassenwart
+- [ ] Real social media handles — replace `#` in footer with real URLs
 - [ ] `favicon.ico` — Browser tab icon (use club logo)
-- [ ] Training schedule section (Trainingszeiten)
-- [ ] eFB / Fahrtenbuch link (as on old site)
-- [ ] Pegeldienst link (as on old site)
+- [ ] Satzung page (link to PDF or text)
+- [ ] Berichte / News blog (consider Instagram embed instead)
 
 ---
 

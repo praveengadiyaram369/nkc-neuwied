@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vorstand – Neuwieder Kanu-Club e.V.</title>
+<meta name="description" content="Der Vorstand des Neuwieder Kanu-Club e.V. – Kontakt zu allen Vorstandsmitgliedern."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Jost',sans-serif;color:#1a2634;background:#f5f7fa;min-height:100vh}
+a{color:#2a7abf;text-decoration:none}
+a:hover{text-decoration:underline}
+:root{--blue:#2a7abf;--blue-dark:#1a5490;--blue-nav:#0f3660;--red:#cc2f26;--gold-lt:#d4a44a;--sand:#f5f7fa;--border:rgba(42,122,191,.15)}
+
+nav{background:var(--blue-nav);padding:0 2.5rem;height:68px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:.7rem}
+.nav-logo img{height:38px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))}
+.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:#fff;line-height:1.25}
+.nav-logo-text span{display:block;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);font-family:'Jost',sans-serif}
+.nav-back{font-size:.78rem;color:rgba(255,255,255,.65);letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
+.nav-back:hover{color:var(--gold-lt);text-decoration:none}
+
+.hero-bar{background:var(--blue);padding:3.5rem 2rem;text-align:center}
+.page-label{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-lt);margin-bottom:.8rem}
+.hero-bar h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:600;color:#fff;line-height:1.15}
+.hero-bar h1 em{font-style:italic;color:var(--gold-lt)}
+.hero-bar p{font-size:.95rem;font-weight:300;color:rgba(255,255,255,.75);margin-top:.8rem;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.75}
+
+.content{max-width:1060px;margin:0 auto;padding:4rem 2rem}
+
+.board-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.4rem}
+.board-card{background:#fff;border-radius:2px;border-top:3px solid var(--blue);box-shadow:0 2px 16px rgba(42,122,191,.07);padding:1.8rem 1.6rem;transition:transform .25s,box-shadow .25s}
+.board-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(42,122,191,.13)}
+.board-card.first{border-top-color:var(--red)}
+.board-role{font-size:.68rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:.5rem}
+.board-card.first .board-role{color:var(--red)}
+.board-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:#1a2634;margin-bottom:1rem;line-height:1.2}
+.board-contacts{display:flex;flex-direction:column;gap:.5rem}
+.board-contact{display:flex;align-items:center;gap:.6rem;font-size:.83rem;font-weight:300;color:#5a7080}
+.board-contact a{color:var(--blue);word-break:break-all}
+.board-contact a:hover{text-decoration:underline}
+.contact-icon{font-size:1rem;flex-shrink:0}
+
+.section-label-small{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem}
+.info-box{background:#fff;border:1px solid var(--border);border-radius:2px;padding:1.5rem;margin-top:3rem}
+.info-box h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:#1a2634;margin-bottom:.8rem}
+.info-box p{font-size:.9rem;font-weight:300;color:#5a7080;line-height:1.8}
+.info-box a{color:var(--blue)}
+
+footer{background:#071e35;padding:2rem;text-align:center;font-size:.8rem;color:rgba(255,255,255,.3);font-weight:300;margin-top:0}
+footer a{color:rgba(255,255,255,.3)}
+footer a:hover{color:var(--gold-lt);text-decoration:none}
+
+@media(max-width:600px){
+  nav{padding:0 1.2rem}
+  .content{padding:2.5rem 1.2rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <img src="logo.jpeg" alt="NKC Logo"/>
+    <div class="nav-logo-text">Neuwieder Kanu-Club e.V.<span>Gegründet 1920</span></div>
+  </div>
+  <a href="index.html" class="nav-back">← Zurück zur Startseite</a>
+</nav>
+
+<div class="hero-bar">
+  <p class="page-label">Unser Verein</p>
+  <h1>Der <em>Vorstand</em></h1>
+  <p>Die Menschen, die den NKC Neuwied am Laufen halten — ehrenamtlich und mit Herzblut.</p>
+</div>
+
+<div class="content">
+
+  <div class="board-grid">
+
+    <div class="board-card first">
+      <div class="board-role">1. Vorsitzender</div>
+      <div class="board-name">Martin Klein</div>
+      <div class="board-contacts">
+        <div class="board-contact">
+          <span class="contact-icon">📞</span>
+          <span>Telefon auf Anfrage</span>
+        </div>
+        <div class="board-contact">
+          <span class="contact-icon">✉️</span>
+          <a href="mailto:1.Vorsitzender@nkc-neuwied.de">1.Vorsitzender@nkc-neuwied.de</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="board-card">
+      <div class="board-role">2. Vorsitzender</div>
+      <div class="board-name">Klaus Heyduczek</div>
+      <div class="board-contacts">
+        <div class="board-contact">
+          <span class="contact-icon">✉️</span>
+          <a href="mailto:2.Vorsitzender@nkc-neuwied.de">2.Vorsitzender@nkc-neuwied.de</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="board-card">
+      <div class="board-role">Kassenwart</div>
+      <div class="board-name">Richard Korscheid</div>
+      <div class="board-contacts">
+        <div class="board-contact">
+          <span class="contact-icon">✉️</span>
+          <a href="mailto:Kassenwart@nkc-neuwied.de">Kassenwart@nkc-neuwied.de</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="board-card">
+      <div class="board-role">Schriftwart</div>
+      <div class="board-name">Rainer Molitor</div>
+      <div class="board-contacts">
+        <div class="board-contact">
+          <span class="contact-icon">✉️</span>
+          <a href="mailto:Schriftwart@nkc-neuwied.de">Schriftwart@nkc-neuwied.de</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="board-card">
+      <div class="board-role">Wanderwart</div>
+      <div class="board-name">Volker Robbert</div>
+      <div class="board-contacts">
+        <div class="board-contact">
+          <span class="contact-icon">✉️</span>
+          <a href="mailto:Wanderwart@nkc-neuwied.de">Wanderwart@nkc-neuwied.de</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="board-card">
+      <div class="board-role">Sportwart</div>
+      <div class="board-name">Benjamin Klein</div>
+      <div class="board-contacts">
+        <div class="board-contact">
+          <span class="contact-icon">✉️</span>
+          <a href="mailto:Sportwart@nkc-neuwied.de">Sportwart@nkc-neuwied.de</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="board-card">
+      <div class="board-role">Umweltwart</div>
+      <div class="board-name">Casper Sklenar</div>
+      <div class="board-contacts">
+        <div class="board-contact">
+          <span class="contact-icon">✉️</span>
+          <a href="mailto:Umweltwart@nkc-neuwied.de">Umweltwart@nkc-neuwied.de</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="board-card">
+      <div class="board-role">Hauswart</div>
+      <div class="board-name">Dominik Bolz</div>
+      <div class="board-contacts">
+        <div class="board-contact">
+          <span class="contact-icon">📞</span>
+          <span>Telefon auf Anfrage</span>
+        </div>
+        <div class="board-contact">
+          <span class="contact-icon">✉️</span>
+          <a href="mailto:Hauswart@nkc-neuwied.de">Hauswart@nkc-neuwied.de</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="info-box">
+    <h3>Allgemeiner Kontakt</h3>
+    <p>
+      Für allgemeine Anfragen, Schnupperpaddeln und Mitgliedschaft:<br/>
+      ✉️ <a href="mailto:gaeste@nkc-neuwied.de">gaeste@nkc-neuwied.de</a> &nbsp;·&nbsp;
+      📞 <a href="tel:+491606306402">+49 160 6306402</a> &nbsp;·&nbsp;
+      💬 <a href="https://wa.me/491606306402" target="_blank" rel="noopener">WhatsApp</a><br/><br/>
+      Neuwieder Kanu-Club e.V. · Rheinstraße 56 · 56564 Neuwied · Rhein-km 608
+    </p>
+  </div>
+
+</div>
+
+<footer>
+  © 2025 Neuwieder Kanu-Club e.V. —
+  <a href="index.html">Startseite</a> ·
+  <a href="impressum.html">Impressum</a> ·
+  <a href="datenschutz.html">Datenschutz</a>
+</footer>
+
+</body>
+</html>
