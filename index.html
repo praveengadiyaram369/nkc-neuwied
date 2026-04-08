@@ -5,6 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Neuwieder Kanu-Club e.V. – Paddeln am Rhein seit 1920</title>
 <meta name="description" content="Neuwieder Kanu-Club e.V. – Gegründet 1920. Kanadier, Kajak, Wanderfahrten, Jugend. Rheinstr. 56, Neuwied."/>
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="favicon.ico"/>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
+
+<!-- Open Graph / Social Media Sharing -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://www.nkc-neuwied.de/"/>
+<meta property="og:title" content="Neuwieder Kanu-Club e.V. – Paddeln am Rhein seit 1920"/>
+<meta property="og:description" content="Vom gemütlichen Kanadier-Wandern bis zum Kajak-Sport — bei uns paddeln Familien, Kinder und erfahrene Sportler gemeinsam auf dem Rhein. Gegründet 1920 in Neuwied."/>
+<meta property="og:image" content="https://www.nkc-neuwied.de/og-image.jpg"/>
+<meta property="og:locale" content="de_DE"/>
+<meta property="og:site_name" content="Neuwieder Kanu-Club e.V."/>
+
+<!-- Twitter/X Card -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Neuwieder Kanu-Club e.V."/>
+<meta name="twitter:description" content="Paddeln am Rhein seit 1920 – Kanadier, Kajak, Jugend, Touren. Neuwied, Rhein-km 608."/>
+<meta name="twitter:image" content="https://www.nkc-neuwied.de/og-image.jpg"/>
+
+<!-- Canonical -->
+<link rel="canonical" href="https://www.nkc-neuwied.de/"/>
+
+<!-- Theme color (browser chrome on mobile) -->
+<meta name="theme-color" content="#0f3660"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
@@ -256,6 +283,53 @@ footer{background:#071e35;padding:4rem 0 2rem}
 @media(max-width:480px){
   .quicklinks{grid-template-columns:1fr}
   .hero-btns,.contact-methods,.mbtns{flex-direction:column;align-items:center}
+}
+
+/* ── PRIVACY BANNER ── */
+.privacy-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:2000;
+  background:var(--blue-nav);
+  border-top:2px solid var(--blue);
+  padding:1.1rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1.5rem;flex-wrap:wrap;
+  box-shadow:0 -4px 24px rgba(0,0,0,.25);
+  transform:translateY(100%);
+  transition:transform .4s ease;
+}
+.privacy-bar.visible{transform:translateY(0)}
+.privacy-bar-text{
+  display:flex;align-items:center;gap:.9rem;flex:1;min-width:260px;
+}
+.privacy-bar-icon{font-size:1.5rem;flex-shrink:0}
+.privacy-bar-text p{
+  font-size:.82rem;font-weight:300;color:rgba(255,255,255,.85);line-height:1.6;
+}
+.privacy-bar-text strong{color:#fff;font-weight:500}
+.privacy-bar-text a{color:var(--gold-lt);text-decoration:underline}
+.privacy-bar-text a:hover{color:#fff}
+.privacy-bar-actions{display:flex;gap:.7rem;align-items:center;flex-shrink:0}
+.pb-btn-ok{
+  background:var(--blue);color:#fff;
+  border:1.5px solid var(--blue);
+  padding:.55rem 1.4rem;
+  font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  border-radius:2px;cursor:pointer;transition:all .2s;
+  font-family:'Jost',sans-serif;
+}
+.pb-btn-ok:hover{background:var(--blue-dark);transform:translateY(-1px)}
+.pb-btn-info{
+  background:transparent;color:rgba(255,255,255,.6);
+  border:1.5px solid rgba(255,255,255,.3);
+  padding:.55rem 1rem;
+  font-size:.78rem;font-weight:400;letter-spacing:.08em;
+  border-radius:2px;cursor:pointer;transition:all .2s;
+  font-family:'Jost',sans-serif;text-transform:uppercase;
+}
+.pb-btn-info:hover{color:#fff;border-color:rgba(255,255,255,.6)}
+@media(max-width:600px){
+  .privacy-bar{padding:.9rem 1.2rem;gap:1rem}
+  .privacy-bar-actions{width:100%;justify-content:flex-end}
 }
 </style>
 </head>
@@ -744,6 +818,26 @@ footer{background:#071e35;padding:4rem 0 2rem}
   </div>
 </footer>
 
+<!-- ── PRIVACY NOTICE BAR ── -->
+<div class="privacy-bar" id="privacyBar" role="dialog" aria-label="Datenschutzhinweis">
+  <div class="privacy-bar-text">
+    <div class="privacy-bar-icon">🔒</div>
+    <p>
+      <strong>Kein Tracking, keine Werbung.</strong>
+      Diese Website verwendet keine Analyse-Cookies und kein Tracking.
+      Hosting über Cloudflare (EU-DSGVO-konform).
+      <a href="datenschutz.html">Datenschutzerklärung →</a>
+    </p>
+  </div>
+  <div class="privacy-bar-actions">
+    <button class="pb-btn-info" onclick="window.location.href='datenschutz.html'">Mehr Info</button>
+    <button class="pb-btn-ok" onclick="acceptPrivacy()" aria-label="Verstanden">
+      ✓ Verstanden
+    </button>
+  </div>
+</div>
+
+
 <script>
 // Slider
 const slides=document.querySelectorAll('.slide'),dotsEl=document.getElementById('dots');
@@ -767,6 +861,22 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});});
+  // Privacy banner
+  (function(){
+    if(!localStorage.getItem('nkc_privacy_ok')){
+      setTimeout(()=>{
+        document.getElementById('privacyBar').classList.add('visible');
+      }, 1200);
+    }
+  })();
+  function acceptPrivacy(){
+    localStorage.setItem('nkc_privacy_ok','1');
+    const bar = document.getElementById('privacyBar');
+    bar.style.transition='transform .35s ease';
+    bar.style.transform='translateY(100%)';
+    setTimeout(()=>bar.remove(), 400);
+  }
+
 </script>
 </body>
 </html>

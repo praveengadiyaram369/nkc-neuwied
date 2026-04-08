@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Seite nicht gefunden – Neuwieder Kanu-Club e.V.</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<meta name="theme-color" content="#0f3660"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:'Jost',sans-serif;
+  background:#0f3660;
+  color:#fff;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  min-height:100vh;
+  text-align:center;
+  padding:2rem;
+  /* Rhine-inspired wave background */
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(42,122,191,.35) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(204,47,38,.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, rgba(42,122,191,.2) 0%, transparent 50%);
+}
+.logo-wrap{margin-bottom:2rem}
+.logo-wrap img{height:80px;width:auto;filter:drop-shadow(0 4px 12px rgba(0,0,0,.4))}
+.error-code{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(5rem,18vw,10rem);
+  font-weight:600;
+  line-height:1;
+  color:rgba(255,255,255,.12);
+  letter-spacing:-.02em;
+  margin-bottom:-1rem;
+}
+.paddle-icon{font-size:3.5rem;margin-bottom:1rem;display:block;animation:wobble 3s ease infinite}
+h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.6rem,5vw,2.8rem);
+  font-weight:600;
+  margin-bottom:1rem;
+  line-height:1.2;
+}
+h1 em{font-style:italic;color:#d4a44a}
+p{
+  font-size:1rem;font-weight:300;
+  color:rgba(255,255,255,.72);
+  max-width:460px;
+  line-height:1.8;
+  margin-bottom:2.5rem;
+}
+.nav-links{
+  display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;
+  margin-bottom:3rem;
+}
+.btn{
+  display:inline-block;
+  padding:.75rem 1.8rem;
+  font-family:'Jost',sans-serif;
+  font-size:.8rem;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;
+  border-radius:2px;cursor:pointer;
+  transition:all .25s;text-decoration:none;
+}
+.btn-blue{background:#2a7abf;color:#fff;border:1.5px solid #2a7abf}
+.btn-blue:hover{background:#1a5490;transform:translateY(-2px);box-shadow:0 8px 20px rgba(42,122,191,.4)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+.btn-ghost:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
+.contact-hint{
+  font-size:.82rem;font-weight:300;
+  color:rgba(255,255,255,.45);
+}
+.contact-hint a{color:#d4a44a;text-decoration:none}
+.contact-hint a:hover{text-decoration:underline}
+@keyframes wobble{
+  0%,100%{transform:rotate(-8deg)}
+  50%{transform:rotate(8deg)}
+}
+@media(max-width:480px){
+  .nav-links{flex-direction:column;align-items:center;max-width:240px;margin:0 auto 2.5rem}
+  .btn{width:100%;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<div class="logo-wrap">
+  <img src="logo.png" alt="NKC Neuwied Logo"/>
+</div>
+
+<div class="error-code">404</div>
+
+<span class="paddle-icon">🛶</span>
+
+<h1>Diese Seite ist<br><em>abgepaddelt</em>.</h1>
+
+<p>Die gesuchte Seite konnte nicht gefunden werden. Vielleicht war der Link veraltet oder die Adresse hat sich geändert — zurück zum Bootshaus!</p>
+
+<div class="nav-links">
+  <a href="index.html" class="btn btn-blue">🏠 Zurück zur Startseite</a>
+  <a href="index.html#termine" class="btn btn-ghost">📅 Termine</a>
+  <a href="index.html#mitglied" class="btn btn-ghost">🤝 Mitglied werden</a>
+  <a href="index.html#anfahrt" class="btn btn-ghost">📍 Anfahrt</a>
+</div>
+
+<p class="contact-hint">
+  Noch immer nicht gefunden? Schreib uns:<br/>
+  <a href="mailto:gaeste@nkc-neuwied.de">gaeste@nkc-neuwied.de</a>
+</p>
+
+</body>
+</html>
