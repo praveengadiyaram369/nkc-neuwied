@@ -77,13 +77,13 @@ nav.scrolled{background:rgba(15,54,96,.97);box-shadow:0 2px 30px rgba(0,0,0,.3);
 .slide::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(5,20,45,.55) 0%,rgba(5,20,45,.25) 45%,rgba(5,20,45,.60) 100%)}
 /* ── SLIDER IMAGES ──────────────────────────────────────────────────
    To use your own photos: add images to the img/ folder in the repo
-   then replace the URLs below with: url('img/slider1.jpg') etc.
+   then replace the URLs below with: url('img/slider/slider1.jpg') etc.
    Recommended size: 1920 × 1080 px, JPG quality 85%, max 500 KB each
    ─────────────────────────────────────────────────────────────────── */
-.slide-1{background-image:url('img/slider1.jpg')}
-.slide-2{background-image:url('img/slider2.jpg')}
-.slide-3{background-image:url('img/slider3.jpg')}
-.slide-4{background-image:url('img/slider4.jpg')}
+.slide-1{background-image:url('img/slider/slider1.jpg')}
+.slide-2{background-image:url('img/slider/slider2.jpg')}
+.slide-3{background-image:url('img/slider/slider3.jpg')}
+.slide-4{background-image:url('img/slider/slider4.jpg')}
 .hero-content{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 2rem}
 .hero-eyebrow{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-lt);margin-bottom:.8rem;opacity:0;animation:fadeUp 1s .4s forwards;text-shadow:0 1px 8px rgba(0,0,0,.8)}
 .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5.5vw,4.2rem);font-weight:600;color:#fff;line-height:1.12;margin-bottom:1.2rem;opacity:0;animation:fadeUp 1s .7s forwards;text-shadow:0 2px 20px rgba(0,0,0,.9),0 1px 4px rgba(0,0,0,.8)}
@@ -337,6 +337,126 @@ footer{background:#071e35;padding:4rem 0 2rem}
   .privacy-bar-actions{width:100%;justify-content:flex-end}
 }
 
+
+/* ── PHOTO STRIP ── */
+.photo-strip-section{background:#fff;padding:4rem 0 0}
+.photo-strip-header{text-align:center;margin-bottom:2rem}
+.photo-strip{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:4px;
+  cursor:pointer;
+}
+.photo-strip-item{
+  position:relative;
+  overflow:hidden;
+  aspect-ratio:4/3;
+}
+.photo-strip-item img{
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:transform .5s ease;
+  display:block;
+}
+.photo-strip-item:hover img{transform:scale(1.07)}
+.photo-strip-item::after{
+  content:'';
+  position:absolute;inset:0;
+  background:rgba(15,54,96,.0);
+  transition:background .3s;
+}
+.photo-strip-item:hover::after{background:rgba(15,54,96,.25)}
+.photo-strip-item .zoom-icon{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  z-index:2;
+  color:#fff;font-size:1.6rem;
+  transition:transform .25s ease;
+  text-shadow:0 2px 8px rgba(0,0,0,.6);
+  pointer-events:none;
+}
+.photo-strip-item:hover .zoom-icon{transform:translate(-50%,-50%) scale(1)}
+.photo-strip-more{
+  grid-column:5;
+  position:relative;
+}
+.photo-strip-more img{filter:brightness(.5)}
+.photo-strip-more .more-label{
+  position:absolute;inset:0;z-index:2;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  color:#fff;
+  font-family:'Cormorant Garamond',serif;
+}
+.photo-strip-more .more-label span{
+  font-size:1.8rem;font-weight:600;
+  text-shadow:0 2px 8px rgba(0,0,0,.5);
+}
+.photo-strip-more .more-label small{
+  font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.8);margin-top:.3rem;font-family:'Jost',sans-serif;
+}
+
+/* ── LIGHTBOX ── */
+.lightbox{
+  display:none;
+  position:fixed;inset:0;z-index:9000;
+  background:rgba(0,0,0,.93);
+  align-items:center;justify-content:center;
+  flex-direction:column;
+}
+.lightbox.open{display:flex}
+.lightbox-img-wrap{
+  position:relative;
+  max-width:90vw;max-height:80vh;
+  display:flex;align-items:center;justify-content:center;
+}
+.lightbox-img-wrap img{
+  max-width:90vw;max-height:80vh;
+  object-fit:contain;
+  border-radius:2px;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+}
+.lightbox-close{
+  position:fixed;top:1.5rem;right:2rem;
+  color:rgba(255,255,255,.7);font-size:2rem;
+  cursor:pointer;background:none;border:none;
+  line-height:1;transition:color .2s;z-index:9001;
+}
+.lightbox-close:hover{color:#fff}
+.lightbox-prev,.lightbox-next{
+  position:fixed;top:50%;transform:translateY(-50%);
+  color:rgba(255,255,255,.7);font-size:2rem;
+  cursor:pointer;background:rgba(255,255,255,.1);
+  border:none;width:52px;height:52px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;z-index:9001;
+  backdrop-filter:blur(4px);
+}
+.lightbox-prev{left:1.5rem}
+.lightbox-next{right:1.5rem}
+.lightbox-prev:hover,.lightbox-next:hover{background:rgba(255,255,255,.2);color:#fff}
+.lightbox-caption{
+  margin-top:1rem;
+  font-size:.82rem;font-weight:300;
+  color:rgba(255,255,255,.55);
+  letter-spacing:.08em;
+}
+.lightbox-counter{
+  margin-top:.4rem;font-size:.75rem;
+  color:rgba(255,255,255,.35);letter-spacing:.1em;
+}
+@media(max-width:768px){
+  .photo-strip{grid-template-columns:repeat(3,1fr)}
+  .photo-strip-item:nth-child(4),.photo-strip-item:nth-child(5){display:none}
+  .photo-strip-more{display:none}
+  .lightbox-prev{left:.5rem}
+  .lightbox-next{right:.5rem}
+}
+@media(max-width:480px){
+  .photo-strip{grid-template-columns:repeat(2,1fr)}
+  .photo-strip-item:nth-child(3){display:none}
+}
 </style>
 </head>
 <body>
@@ -352,6 +472,7 @@ footer{background:#071e35;padding:4rem 0 2rem}
   <ul class="nav-links">
     <li><a href="#ueber-uns">Über uns</a></li>
     <li><a href="#aktivitaeten">Aktivitäten</a></li>
+    <li><a href="galerie.html">Galerie</a></li>
     <li><a href="#termine">Termine</a></li>
     <li><a href="#mitglied">Mitglied</a></li>
     <li><a href="#anfahrt">Anfahrt</a></li>
@@ -367,6 +488,7 @@ footer{background:#071e35;padding:4rem 0 2rem}
 <div class="mobile-menu" id="mobileMenu">
   <a href="#ueber-uns" onclick="closeMenu()">Über uns</a>
   <a href="#aktivitaeten" onclick="closeMenu()">Aktivitäten</a>
+  <a href="galerie.html" onclick="closeMenu()">Galerie</a>
   <a href="#termine" onclick="closeMenu()">Termine 2025</a>
   <a href="#mitglied" onclick="closeMenu()">Mitglied werden</a>
   <a href="#anfahrt" onclick="closeMenu()">Anfahrt</a>
@@ -525,6 +647,54 @@ footer{background:#071e35;padding:4rem 0 2rem}
     </div>
   </div>
 </section>
+
+
+<!-- PHOTO STRIP -->
+<section class="photo-strip-section" id="galerie">
+  <div class="container">
+    <div class="photo-strip-header reveal">
+      <p class="section-label">Einblicke</p>
+      <h2 class="section-title">Der NKC in <em>Bildern</em>.</h2>
+      <p class="section-body" style="margin:0 auto;max-width:480px">Auf dem Rhein, der Lahn, am Bootshaus — echte Momente aus unserem Vereinsleben.</p>
+    </div>
+  </div>
+  <div class="photo-strip" id="photoStrip">
+    <div class="photo-strip-item reveal" onclick="openLightbox(0)">
+      <img src="img/gallery/gallery1.jpg" alt="Paddeln auf dem Rhein" loading="lazy"/>
+      <span class="zoom-icon">&#8853;</span>
+    </div>
+    <div class="photo-strip-item reveal rd1" onclick="openLightbox(1)">
+      <img src="img/gallery/gallery2.jpg" alt="Kajaktraining" loading="lazy"/>
+      <span class="zoom-icon">&#8853;</span>
+    </div>
+    <div class="photo-strip-item reveal rd2" onclick="openLightbox(2)">
+      <img src="img/gallery/gallery3.jpg" alt="Gruppenausfahrt" loading="lazy"/>
+      <span class="zoom-icon">&#8853;</span>
+    </div>
+    <div class="photo-strip-item reveal rd3" onclick="openLightbox(3)">
+      <img src="img/gallery/gallery4.jpg" alt="Jugend am Wasser" loading="lazy"/>
+      <span class="zoom-icon">&#8853;</span>
+    </div>
+    <div class="photo-strip-item photo-strip-more reveal rd4" onclick="window.location.href='galerie.html'">
+      <img src="img/gallery/gallery5.jpg" alt="Mehr Fotos" loading="lazy"/>
+      <div class="more-label">
+        <span>+ Mehr</span>
+        <small>Alle Fotos</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">&#10005;</button>
+  <button class="lightbox-prev" onclick="lightboxNav(-1)">&#8592;</button>
+  <div class="lightbox-img-wrap">
+    <img id="lightboxImg" src="" alt=""/>
+  </div>
+  <button class="lightbox-next" onclick="lightboxNav(1)">&#8594;</button>
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+</div>
 
 <!-- PARALLAX -->
 <div class="parallax-cta">
@@ -790,7 +960,9 @@ footer{background:#071e35;padding:4rem 0 2rem}
         <ul class="footer-links">
           <li><a href="#ueber-uns">Über uns</a></li>
           <li><a href="#aktivitaeten">Aktivitäten</a></li>
+    <li><a href="galerie.html">Galerie</a></li>
           <li><a href="#termine">Termine 2025</a></li>
+          <li><a href="galerie.html">Galerie</a></li>
           <li><a href="#mitglied">Mitglied werden</a></li>
           <li><a href="https://www.kanu-efb.de/" target="_blank" rel="noopener">eFB Fahrtenbuch</a></li>
           <li><a href="vorstand.html">Vorstand</a></li>
@@ -882,6 +1054,49 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click'
     bar.style.transform='translateY(100%)';
     setTimeout(()=>bar.remove(), 400);
   }
+
+  // Lightbox
+  const galleryImgs = [
+    {src:'img/gallery/gallery1.jpg', caption:'Paddeln auf dem Rhein'},
+    {src:'img/gallery/gallery2.jpg', caption:'Kajaktraining'},
+    {src:'img/gallery/gallery3.jpg', caption:'Gruppenausfahrt'},
+    {src:'img/gallery/gallery4.jpg', caption:'Jugend am Wasser'},
+    {src:'img/gallery/gallery5.jpg', caption:'Vereinsleben NKC'},
+  ];
+  let lbIndex = 0;
+
+  function openLightbox(i){
+    lbIndex = i;
+    updateLightbox();
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeLightbox(){
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow='';
+  }
+  function closeLightboxOutside(e){
+    if(e.target===document.getElementById('lightbox')) closeLightbox();
+  }
+  function lightboxNav(dir){
+    lbIndex=(lbIndex+dir+galleryImgs.length)%galleryImgs.length;
+    updateLightbox();
+  }
+  function updateLightbox(){
+    const img=galleryImgs[lbIndex];
+    document.getElementById('lightboxImg').src=img.src;
+    document.getElementById('lightboxImg').alt=img.caption;
+    document.getElementById('lightboxCaption').textContent=img.caption;
+    document.getElementById('lightboxCounter').textContent=(lbIndex+1)+' / '+galleryImgs.length;
+  }
+  // Keyboard navigation
+  document.addEventListener('keydown',e=>{
+    const lb=document.getElementById('lightbox');
+    if(!lb.classList.contains('open')) return;
+    if(e.key==='ArrowRight') lightboxNav(1);
+    if(e.key==='ArrowLeft') lightboxNav(-1);
+    if(e.key==='Escape') closeLightbox();
+  });
 
 </script>
 </body>

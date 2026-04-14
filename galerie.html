@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Galerie – Neuwieder Kanu-Club e.V.</title>
+<meta name="description" content="Fotos vom Neuwieder Kanu-Club e.V. – Touren, Training, Jugend und Vereinsleben am Rhein."/>
+<link rel="icon" type="image/x-icon" href="favicon.ico"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<meta name="theme-color" content="#0f3660"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Jost',sans-serif;color:#1a2634;background:#f5f7fa;min-height:100vh}
+a{text-decoration:none;color:inherit}
+:root{
+  --blue:#2a7abf;--blue-dark:#1a5490;--blue-nav:#0f3660;
+  --red:#cc2f26;--gold:#b8892e;--gold-lt:#d4a44a;
+  --sand:#f5f7fa;--border:rgba(42,122,191,.15);
+}
+
+/* NAV */
+nav{background:var(--blue-nav);padding:0 2.5rem;height:68px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:.7rem}
+.nav-logo img{height:38px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))}
+.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:#fff;line-height:1.25}
+.nav-logo-text span{display:block;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);font-family:'Jost',sans-serif}
+.nav-back{font-size:.78rem;color:rgba(255,255,255,.65);letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
+.nav-back:hover{color:var(--gold-lt)}
+
+/* HERO */
+.hero-bar{background:var(--blue);padding:3.5rem 2rem;text-align:center}
+.page-label{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-lt);margin-bottom:.8rem}
+.hero-bar h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:600;color:#fff;line-height:1.15}
+.hero-bar h1 em{font-style:italic;color:var(--gold-lt)}
+.hero-bar p{font-size:.95rem;font-weight:300;color:rgba(255,255,255,.75);margin-top:.8rem;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.75}
+
+/* FILTER TABS */
+.filter-bar{background:#fff;border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.filter-btn{font-family:'Jost',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:.45rem 1.1rem;border-radius:2px;cursor:pointer;transition:all .2s;border:1.5px solid var(--border);background:transparent;color:var(--blue)}
+.filter-btn:hover{border-color:var(--blue);background:rgba(42,122,191,.06)}
+.filter-btn.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+/* GALLERY GRID */
+.gallery-content{max-width:1200px;margin:0 auto;padding:2.5rem 1.5rem 5rem}
+.gallery-grid{
+  columns:4 220px;
+  column-gap:6px;
+}
+.gallery-item{
+  break-inside:avoid;
+  margin-bottom:6px;
+  overflow:hidden;
+  border-radius:2px;
+  cursor:pointer;
+  position:relative;
+  display:block;
+}
+.gallery-item img{
+  width:100%;display:block;
+  transition:transform .5s ease;
+}
+.gallery-item:hover img{transform:scale(1.04)}
+.gallery-item::after{
+  content:'';position:absolute;inset:0;
+  background:rgba(15,54,96,0);
+  transition:background .3s;
+}
+.gallery-item:hover::after{background:rgba(15,54,96,.3)}
+.gallery-item .item-zoom{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  z-index:2;color:#fff;font-size:1.8rem;
+  transition:transform .25s;pointer-events:none;
+  text-shadow:0 2px 8px rgba(0,0,0,.5);
+}
+.gallery-item:hover .item-zoom{transform:translate(-50%,-50%) scale(1)}
+.gallery-item[data-cat].hidden{display:none}
+.gallery-count{font-size:.8rem;color:#5a7080;font-weight:300;text-align:center;margin-bottom:2rem}
+
+/* SOCIAL NOTE */
+.social-note-box{
+  background:#fff;border:1px solid var(--border);border-radius:2px;
+  padding:2rem;text-align:center;margin:0 auto 3rem;
+  max-width:600px;
+}
+.social-note-box p{font-size:.9rem;font-weight:300;color:#5a7080;line-height:1.8}
+.social-note-box strong{color:#1a2634;font-weight:500}
+.social-btns{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;margin-top:1.2rem}
+.s-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem 1.3rem;border-radius:2px;font-size:.78rem;font-weight:500;color:#fff;transition:all .2s}
+.s-ig{background:#e1306c}.s-ig:hover{background:#c0255a}
+.s-fb{background:#1877f2}.s-fb:hover{background:#145fc8}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.93);align-items:center;justify-content:center;flex-direction:column}
+.lightbox.open{display:flex}
+.lightbox-img-wrap{max-width:90vw;max-height:80vh;display:flex;align-items:center;justify-content:center}
+.lightbox-img-wrap img{max-width:90vw;max-height:80vh;object-fit:contain;border-radius:2px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.lightbox-close{position:fixed;top:1.5rem;right:2rem;color:rgba(255,255,255,.7);font-size:2rem;cursor:pointer;background:none;border:none;line-height:1;transition:color .2s;z-index:9001}
+.lightbox-close:hover{color:#fff}
+.lightbox-prev,.lightbox-next{position:fixed;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.7);font-size:1.4rem;cursor:pointer;background:rgba(255,255,255,.1);border:none;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:9001;backdrop-filter:blur(4px)}
+.lightbox-prev{left:1.5rem}.lightbox-next{right:1.5rem}
+.lightbox-prev:hover,.lightbox-next:hover{background:rgba(255,255,255,.2);color:#fff}
+.lightbox-caption{margin-top:1rem;font-size:.82rem;font-weight:300;color:rgba(255,255,255,.55);letter-spacing:.08em}
+.lightbox-counter{margin-top:.4rem;font-size:.75rem;color:rgba(255,255,255,.35);letter-spacing:.1em}
+
+footer{background:#071e35;padding:2rem;text-align:center;font-size:.8rem;color:rgba(255,255,255,.3);font-weight:300}
+footer a{color:rgba(255,255,255,.3)}
+footer a:hover{color:var(--gold-lt)}
+
+@media(max-width:600px){
+  nav{padding:0 1.2rem}
+  .gallery-grid{columns:2 160px}
+  .filter-bar{padding:.8rem 1rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <img src="logo.png" alt="NKC Logo"/>
+    <div class="nav-logo-text">Neuwieder Kanu-Club e.V.<span>Gegründet 1920</span></div>
+  </div>
+  <a href="index.html" class="nav-back">← Zurück zur Startseite</a>
+</nav>
+
+<div class="hero-bar">
+  <p class="page-label">Fotos &amp; Eindrücke</p>
+  <h1>Der NKC in <em>Bildern</em>.</h1>
+  <p>Touren, Training, Jugend und Vereinsleben — echte Momente vom Rhein und unseren Fahrten.</p>
+</div>
+
+<!-- Filter tabs -->
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterGallery('all', this)">Alle</button>
+  <button class="filter-btn" onclick="filterGallery('touren', this)">Touren</button>
+  <button class="filter-btn" onclick="filterGallery('training', this)">Training</button>
+  <button class="filter-btn" onclick="filterGallery('jugend', this)">Jugend</button>
+  <button class="filter-btn" onclick="filterGallery('bootshaus', this)">Bootshaus</button>
+  <button class="filter-btn" onclick="filterGallery('events', this)">Events</button>
+</div>
+
+<div class="gallery-content">
+
+  <!-- Social media note -->
+  <div class="social-note-box">
+    <p><strong>Mehr Fotos &amp; Videos</strong> von Paddeltouren und Events findest du auf unseren Social-Media-Kanälen — frisch nach jeder Ausfahrt!</p>
+    <div class="social-btns">
+      <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="s-btn s-ig">📷 Instagram</a>
+      <a href="https://www.facebook.com/" target="_blank" rel="noopener" class="s-btn s-fb">Facebook</a>
+    </div>
+  </div>
+
+  <p class="gallery-count" id="galleryCount">Alle Fotos</p>
+
+  <!-- ═══════════════════════════════════════════════════════
+       GALLERY GRID
+       To add a photo:
+         1. Copy your image to the img/ folder
+         2. Add a new <div class="gallery-item" data-cat="CATEGORY"> block
+            Categories: touren | training | jugend | bootshaus | events
+         3. Update src, alt and data-index (increment by 1 each time)
+       ═══════════════════════════════════════════════════════ -->
+  <div class="gallery-grid" id="galleryGrid">
+
+    <div class="gallery-item" data-cat="touren" data-index="0" onclick="openLightbox(0)">
+      <img src="img/gallery/gallery1.jpg" alt="Rheintour – Paddeln auf dem Rhein" loading="lazy"/>
+      <span class="item-zoom">&#8853;</span>
+    </div>
+
+    <div class="gallery-item" data-cat="training" data-index="1" onclick="openLightbox(1)">
+      <img src="img/gallery/gallery2.jpg" alt="Kajaktraining auf dem Rhein" loading="lazy"/>
+      <span class="item-zoom">&#8853;</span>
+    </div>
+
+    <div class="gallery-item" data-cat="touren" data-index="2" onclick="openLightbox(2)">
+      <img src="img/gallery/gallery3.jpg" alt="Gruppenausfahrt" loading="lazy"/>
+      <span class="item-zoom">&#8853;</span>
+    </div>
+
+    <div class="gallery-item" data-cat="jugend" data-index="3" onclick="openLightbox(3)">
+      <img src="img/gallery/gallery4.jpg" alt="Jugend am Wasser" loading="lazy"/>
+      <span class="item-zoom">&#8853;</span>
+    </div>
+
+    <div class="gallery-item" data-cat="bootshaus" data-index="4" onclick="openLightbox(4)">
+      <img src="img/gallery/gallery5.jpg" alt="Unser Bootshaus am Pegelturm" loading="lazy"/>
+      <span class="item-zoom">&#8853;</span>
+    </div>
+
+    <!-- ADD MORE PHOTOS HERE — copy one block above and increment data-index -->
+    <!-- Example:
+    <div class="gallery-item" data-cat="touren" data-index="5" onclick="openLightbox(5)">
+      <img src="img/gallery/gallery6.jpg" alt="Herbsttour Lahn" loading="lazy"/>
+      <span class="item-zoom">&#8853;</span>
+    </div>
+    -->
+
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">&#10005;</button>
+  <button class="lightbox-prev" onclick="lightboxNav(-1)">&#8592;</button>
+  <div class="lightbox-img-wrap">
+    <img id="lightboxImg" src="" alt=""/>
+  </div>
+  <button class="lightbox-next" onclick="lightboxNav(1)">&#8594;</button>
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+</div>
+
+<footer>
+  © 2025 Neuwieder Kanu-Club e.V. —
+  <a href="index.html">Startseite</a> ·
+  <a href="impressum.html">Impressum</a> ·
+  <a href="datenschutz.html">Datenschutz</a>
+</footer>
+
+<script>
+  // Build image list from grid items
+  function getVisibleItems(){
+    return Array.from(document.querySelectorAll('.gallery-item:not(.hidden)'));
+  }
+
+  let currentFilter = 'all';
+  let lbItems = [];
+  let lbIndex = 0;
+
+  function filterGallery(cat, btn){
+    currentFilter = cat;
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const items = document.querySelectorAll('.gallery-item');
+    let visible = 0;
+    items.forEach(item=>{
+      const show = cat==='all' || item.dataset.cat===cat;
+      item.classList.toggle('hidden', !show);
+      if(show) visible++;
+    });
+    const label = btn.textContent;
+    document.getElementById('galleryCount').textContent =
+      cat==='all' ? `Alle ${visible} Fotos` : `${visible} Foto${visible!==1?'s':''} – ${label}`;
+  }
+
+  // Set initial count
+  window.addEventListener('DOMContentLoaded', ()=>{
+    const total = document.querySelectorAll('.gallery-item').length;
+    document.getElementById('galleryCount').textContent = `Alle ${total} Fotos`;
+  });
+
+  function openLightbox(clickedIndex){
+    // Build list from currently visible items
+    lbItems = Array.from(document.querySelectorAll('.gallery-item:not(.hidden)'));
+    // Find which position in the visible list the clicked item is
+    lbIndex = lbItems.findIndex(el => parseInt(el.dataset.index) === clickedIndex);
+    if(lbIndex === -1) lbIndex = 0;
+    updateLightbox();
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox(){
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeLightboxOutside(e){
+    if(e.target === document.getElementById('lightbox')) closeLightbox();
+  }
+
+  function lightboxNav(dir){
+    lbIndex = (lbIndex + dir + lbItems.length) % lbItems.length;
+    updateLightbox();
+  }
+
+  function updateLightbox(){
+    const item = lbItems[lbIndex];
+    const img = item.querySelector('img');
+    document.getElementById('lightboxImg').src = img.src;
+    document.getElementById('lightboxImg').alt = img.alt;
+    document.getElementById('lightboxCaption').textContent = img.alt;
+    document.getElementById('lightboxCounter').textContent = (lbIndex+1) + ' / ' + lbItems.length;
+  }
+
+  document.addEventListener('keydown', e=>{
+    const lb = document.getElementById('lightbox');
+    if(!lb.classList.contains('open')) return;
+    if(e.key==='ArrowRight') lightboxNav(1);
+    if(e.key==='ArrowLeft') lightboxNav(-1);
+    if(e.key==='Escape') closeLightbox();
+  });
+</script>
+</body>
+</html>
