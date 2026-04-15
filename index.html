@@ -77,13 +77,10 @@ nav.scrolled{background:rgba(15,54,96,.97);box-shadow:0 2px 30px rgba(0,0,0,.3);
 .slide::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(5,20,45,.55) 0%,rgba(5,20,45,.25) 45%,rgba(5,20,45,.60) 100%)}
 /* ── SLIDER IMAGES ──────────────────────────────────────────────────
    To use your own photos: add images to the img/ folder in the repo
-   then replace the URLs below with: url('img/slider/slider1.jpg') etc.
+   then replace the URLs below with: url('img/slider1.jpg') etc.
    Recommended size: 1920 × 1080 px, JPG quality 85%, max 500 KB each
    ─────────────────────────────────────────────────────────────────── */
-.slide-1{background-image:url('img/slider/slider1.jpg')}
-.slide-2{background-image:url('img/slider/slider2.jpg')}
-.slide-3{background-image:url('img/slider/slider3.jpg')}
-.slide-4{background-image:url('img/slider/slider4.jpg')}
+/* Slider images loaded dynamically from img/slider/images.json */
 .hero-content{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 2rem}
 .hero-eyebrow{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-lt);margin-bottom:.8rem;opacity:0;animation:fadeUp 1s .4s forwards;text-shadow:0 1px 8px rgba(0,0,0,.8)}
 .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5.5vw,4.2rem);font-weight:600;color:#fff;line-height:1.12;margin-bottom:1.2rem;opacity:0;animation:fadeUp 1s .7s forwards;text-shadow:0 2px 20px rgba(0,0,0,.9),0 1px 4px rgba(0,0,0,.8)}
@@ -500,10 +497,8 @@ footer{background:#071e35;padding:4rem 0 2rem}
 
 <!-- HERO -->
 <section class="hero">
-  <div class="slide slide-1 active"></div>
-  <div class="slide slide-2"></div>
-  <div class="slide slide-3"></div>
-  <div class="slide slide-4"></div>
+  <!-- Slides injected dynamically from img/slider/images.json -->
+  <div id="slidesContainer"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">Neuwieder Kanu-Club e.V. · Am Rhein · Gegründet 1920</p>
     <h1 class="hero-title">Willkommen beim<br><em>NKC Neuwied</em>.</h1>
@@ -660,23 +655,23 @@ footer{background:#071e35;padding:4rem 0 2rem}
   </div>
   <div class="photo-strip" id="photoStrip">
     <div class="photo-strip-item reveal" onclick="openLightbox(0)">
-      <img src="img/gallery/gallery1.jpg" alt="Paddeln auf dem Rhein" loading="lazy"/>
+      <img src="img/gallery1.jpg" alt="Paddeln auf dem Rhein" loading="lazy"/>
       <span class="zoom-icon">&#8853;</span>
     </div>
     <div class="photo-strip-item reveal rd1" onclick="openLightbox(1)">
-      <img src="img/gallery/gallery2.jpg" alt="Kajaktraining" loading="lazy"/>
+      <img src="img/gallery2.jpg" alt="Kajaktraining" loading="lazy"/>
       <span class="zoom-icon">&#8853;</span>
     </div>
     <div class="photo-strip-item reveal rd2" onclick="openLightbox(2)">
-      <img src="img/gallery/gallery3.jpg" alt="Gruppenausfahrt" loading="lazy"/>
+      <img src="img/gallery3.jpg" alt="Gruppenausfahrt" loading="lazy"/>
       <span class="zoom-icon">&#8853;</span>
     </div>
     <div class="photo-strip-item reveal rd3" onclick="openLightbox(3)">
-      <img src="img/gallery/gallery4.jpg" alt="Jugend am Wasser" loading="lazy"/>
+      <img src="img/gallery4.jpg" alt="Jugend am Wasser" loading="lazy"/>
       <span class="zoom-icon">&#8853;</span>
     </div>
     <div class="photo-strip-item photo-strip-more reveal rd4" onclick="window.location.href='galerie.html'">
-      <img src="img/gallery/gallery5.jpg" alt="Mehr Fotos" loading="lazy"/>
+      <img src="img/gallery5.jpg" alt="Mehr Fotos" loading="lazy"/>
       <div class="more-label">
         <span>+ Mehr</span>
         <small>Alle Fotos</small>
@@ -1017,13 +1012,7 @@ footer{background:#071e35;padding:4rem 0 2rem}
 
 
 <script>
-// Slider
-const slides=document.querySelectorAll('.slide'),dotsEl=document.getElementById('dots');
-let cur=0,timer;
-slides.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===0?' active':'');d.onclick=()=>goTo(i);dotsEl.appendChild(d);});
-function goTo(n){slides[cur].classList.remove('active');dotsEl.children[cur].classList.remove('active');cur=(n+slides.length)%slides.length;slides[cur].classList.add('active');dotsEl.children[cur].classList.add('active');clearInterval(timer);timer=setInterval(nextSlide,5500);}
-function nextSlide(){goTo(cur+1);}function prevSlide(){goTo(cur-1);}
-timer=setInterval(nextSlide,5500);
+// Slider: see loadSlider() above
 
 // Navbar
 const nav=document.getElementById('navbar');
@@ -1055,48 +1044,167 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click'
     setTimeout(()=>bar.remove(), 400);
   }
 
-  // Lightbox
-  const galleryImgs = [
-    {src:'img/gallery/gallery1.jpg', caption:'Paddeln auf dem Rhein'},
-    {src:'img/gallery/gallery2.jpg', caption:'Kajaktraining'},
-    {src:'img/gallery/gallery3.jpg', caption:'Gruppenausfahrt'},
-    {src:'img/gallery/gallery4.jpg', caption:'Jugend am Wasser'},
-    {src:'img/gallery/gallery5.jpg', caption:'Vereinsleben NKC'},
-  ];
+
+  // ═══════════════════════════════════════════════════
+  // DYNAMIC IMAGE LOADER
+  // Reads img/slider/images.json and img/gallery/images.json
+  // To add images: copy file to folder + add line to JSON
+  // ═══════════════════════════════════════════════════
+
+  let galleryImgs = [];
   let lbIndex = 0;
 
-  function openLightbox(i){
+  // ── Load slider from JSON ──────────────────────────
+  async function loadSlider() {
+    try {
+      const res = await fetch('img/slider/images.json');
+      const slides = await res.json();
+      const container = document.getElementById('slidesContainer');
+      const dotsEl = document.getElementById('dots');
+
+      // Clear loading state
+      container.innerHTML = '';
+      dotsEl.innerHTML = '';
+
+      slides.forEach((slide, i) => {
+        // Create slide div
+        const div = document.createElement('div');
+        div.className = 'slide' + (i === 0 ? ' active' : '');
+        div.style.backgroundImage = `url('img/slider/${slide.file}')`;
+        container.appendChild(div);
+
+        // Create dot
+        const dot = document.createElement('div');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.onclick = () => goTo(i);
+        dotsEl.appendChild(dot);
+      });
+
+      // Restart slider with new slides
+      initSlider();
+    } catch(e) {
+      // Fallback: show a plain dark slide if JSON fails
+      console.warn('Slider images.json not found, using fallback');
+      document.getElementById('slidesContainer').innerHTML =
+        '<div class="slide active" style="background:#0f3660"></div>';
+      initSlider();
+    }
+  }
+
+  // ── Load gallery strip from JSON ───────────────────
+  async function loadGalleryStrip() {
+    try {
+      const res = await fetch('img/gallery/images.json');
+      const images = await res.json();
+      const strip = document.getElementById('photoStrip');
+      strip.innerHTML = '';
+
+      // Show max 4 photos + "more" tile = 5 total
+      const delays = ['', 'rd1', 'rd2', 'rd3', 'rd4'];
+      const preview = images.slice(0, 4);
+
+      preview.forEach((img, i) => {
+        galleryImgs.push({ src: `img/gallery/${img.file}`, caption: img.alt });
+        const div = document.createElement('div');
+        div.className = `photo-strip-item reveal ${delays[i]}`;
+        div.onclick = () => openLightbox(i);
+        div.innerHTML = `
+          <img src="img/gallery/${img.file}" alt="${img.alt}" loading="lazy"/>
+          <span class="zoom-icon">&#8853;</span>`;
+        strip.appendChild(div);
+      });
+
+      // Always add "Mehr Fotos" tile as 5th
+      const more = document.createElement('div');
+      more.className = `photo-strip-item photo-strip-more reveal ${delays[4]}`;
+      more.onclick = () => window.location.href = 'galerie.html';
+      // Use 5th image as background if available, else 1st
+      const bgImg = images[4] || images[0];
+      more.innerHTML = `
+        <img src="img/gallery/${bgImg.file}" alt="Mehr Fotos" loading="lazy"/>
+        <div class="more-label">
+          <span>+ ${images.length > 4 ? images.length - 4 : 'Mehr'}</span>
+          <small>Alle Fotos</small>
+        </div>`;
+      strip.appendChild(more);
+
+      // Re-observe reveal elements
+      strip.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    } catch(e) {
+      console.warn('Gallery images.json not found');
+      document.getElementById('photoStrip').innerHTML =
+        '<div style="grid-column:1/-1;text-align:center;padding:2rem;color:#5a7080">Fotos folgen bald.</div>';
+    }
+  }
+
+  // ── Slider logic ───────────────────────────────────
+  let cur = 0, timer;
+
+  function initSlider() {
+    clearInterval(timer);
+    cur = 0;
+    timer = setInterval(nextSlide, 5500);
+  }
+
+  function goTo(n) {
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    if (!slides.length) return;
+    slides[cur].classList.remove('active');
+    if (dots[cur]) dots[cur].classList.remove('active');
+    cur = (n + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    if (dots[cur]) dots[cur].classList.add('active');
+    clearInterval(timer);
+    timer = setInterval(nextSlide, 5500);
+  }
+  function nextSlide() {
+    const slides = document.querySelectorAll('.slide');
+    if (slides.length) goTo(cur + 1);
+  }
+  function prevSlide() {
+    const slides = document.querySelectorAll('.slide');
+    if (slides.length) goTo(cur - 1);
+  }
+
+  // ── Lightbox ───────────────────────────────────────
+  function openLightbox(i) {
     lbIndex = i;
     updateLightbox();
     document.getElementById('lightbox').classList.add('open');
-    document.body.style.overflow='hidden';
+    document.body.style.overflow = 'hidden';
   }
-  function closeLightbox(){
+  function closeLightbox() {
     document.getElementById('lightbox').classList.remove('open');
-    document.body.style.overflow='';
+    document.body.style.overflow = '';
   }
-  function closeLightboxOutside(e){
-    if(e.target===document.getElementById('lightbox')) closeLightbox();
+  function closeLightboxOutside(e) {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
   }
-  function lightboxNav(dir){
-    lbIndex=(lbIndex+dir+galleryImgs.length)%galleryImgs.length;
+  function lightboxNav(dir) {
+    lbIndex = (lbIndex + dir + galleryImgs.length) % galleryImgs.length;
     updateLightbox();
   }
-  function updateLightbox(){
-    const img=galleryImgs[lbIndex];
-    document.getElementById('lightboxImg').src=img.src;
-    document.getElementById('lightboxImg').alt=img.caption;
-    document.getElementById('lightboxCaption').textContent=img.caption;
-    document.getElementById('lightboxCounter').textContent=(lbIndex+1)+' / '+galleryImgs.length;
+  function updateLightbox() {
+    if (!galleryImgs.length) return;
+    const img = galleryImgs[lbIndex];
+    document.getElementById('lightboxImg').src = img.src;
+    document.getElementById('lightboxImg').alt = img.caption;
+    document.getElementById('lightboxCaption').textContent = img.caption;
+    document.getElementById('lightboxCounter').textContent = (lbIndex + 1) + ' / ' + galleryImgs.length;
   }
-  // Keyboard navigation
-  document.addEventListener('keydown',e=>{
-    const lb=document.getElementById('lightbox');
-    if(!lb.classList.contains('open')) return;
-    if(e.key==='ArrowRight') lightboxNav(1);
-    if(e.key==='ArrowLeft') lightboxNav(-1);
-    if(e.key==='Escape') closeLightbox();
+  document.addEventListener('keydown', e => {
+    const lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'ArrowRight') lightboxNav(1);
+    if (e.key === 'ArrowLeft') lightboxNav(-1);
+    if (e.key === 'Escape') closeLightbox();
   });
+
+  // ── Boot ───────────────────────────────────────────
+  loadSlider();
+  loadGalleryStrip();
 
 </script>
 </body>
