@@ -4,69 +4,56 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Vorstand – Neuwieder Kanu-Club e.V.</title>
-<meta name="description" content="Der Vorstand des Neuwieder Kanu-Club e.V. – Kontakt zu allen Vorstandsmitgliedern."/>
+<link rel="icon" type="image/x-icon" href="favicon.ico"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<meta name="theme-color" content="#0f3660"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Jost',sans-serif;color:#1a2634;background:#f5f7fa;min-height:100vh}
-a{color:#2a7abf;text-decoration:none}
-a:hover{text-decoration:underline}
-:root{--blue:#2a7abf;--blue-dark:#1a5490;--blue-nav:#0f3660;--red:#cc2f26;--gold-lt:#d4a44a;--sand:#f5f7fa;--border:rgba(42,122,191,.15)}
-
+a{text-decoration:none;color:inherit}
+:root{--blue:#2a7abf;--blue-dark:#1a5490;--blue-nav:#0f3660;--red:#cc2f26;--gold:#b8892e;--gold-lt:#d4a44a;--sand:#f5f7fa;--border:rgba(42,122,191,.15)}
 nav{background:var(--blue-nav);padding:0 2.5rem;height:68px;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{display:flex;align-items:center;gap:.7rem}
 .nav-logo img{height:38px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))}
 .nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:#fff;line-height:1.25}
 .nav-logo-text span{display:block;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);font-family:'Jost',sans-serif}
 .nav-back{font-size:.78rem;color:rgba(255,255,255,.65);letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
-.nav-back:hover{color:var(--gold-lt);text-decoration:none}
-
+.nav-back:hover{color:var(--gold-lt)}
 .hero-bar{background:var(--blue);padding:3.5rem 2rem;text-align:center}
 .page-label{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-lt);margin-bottom:.8rem}
 .hero-bar h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:600;color:#fff;line-height:1.15}
 .hero-bar h1 em{font-style:italic;color:var(--gold-lt)}
 .hero-bar p{font-size:.95rem;font-weight:300;color:rgba(255,255,255,.75);margin-top:.8rem;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.75}
-
 .content{max-width:1060px;margin:0 auto;padding:4rem 2rem}
 
-.board-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.4rem}
-.board-card{background:#fff;border-radius:2px;border-top:3px solid var(--blue);box-shadow:0 2px 16px rgba(42,122,191,.07);padding:1.8rem 1.6rem;transition:transform .25s,box-shadow .25s}
+/* Board cards with photo */
+.board-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.4rem}
+.board-card{background:#fff;border-radius:2px;border-top:3px solid var(--blue);box-shadow:0 2px 16px rgba(42,122,191,.07);overflow:hidden;transition:transform .25s,box-shadow .25s}
 .board-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(42,122,191,.13)}
 .board-card.first{border-top-color:var(--red)}
-.board-role{font-size:.68rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:.5rem}
+.board-photo{width:100%;height:180px;overflow:hidden;background:var(--sand);display:flex;align-items:center;justify-content:center}
+.board-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .4s}
+.board-card:hover .board-photo img{transform:scale(1.04)}
+.board-photo-placeholder{font-size:3rem;color:rgba(42,122,191,.25)}
+.board-body{padding:1.2rem 1.4rem 1.4rem}
+.board-role{font-size:.66rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:.4rem}
 .board-card.first .board-role{color:var(--red)}
-.board-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:#1a2634;margin-bottom:1rem;line-height:1.2}
-.board-contacts{display:flex;flex-direction:column;gap:.5rem}
-.board-contact{display:flex;align-items:center;gap:.6rem;font-size:.83rem;font-weight:300;color:#5a7080}
-.board-contact a{color:var(--blue);word-break:break-all}
-.board-contact a:hover{text-decoration:underline}
-.contact-icon{font-size:1rem;flex-shrink:0}
+.board-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#1a2634;line-height:1.2}
 
-.section-label-small{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem}
-.info-box{background:#fff;border:1px solid var(--border);border-radius:2px;padding:1.5rem;margin-top:3rem}
-.info-box h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:#1a2634;margin-bottom:.8rem}
-.info-box p{font-size:.9rem;font-weight:300;color:#5a7080;line-height:1.8}
-.info-box a{color:var(--blue)}
+.contact-box{background:#fff;border:1px solid var(--border);border-radius:2px;padding:1.5rem;margin-top:3rem;text-align:center}
+.contact-box h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:#1a2634;margin-bottom:.7rem}
+.contact-box p{font-size:.9rem;font-weight:300;color:#5a7080;line-height:1.8}
+.contact-box a{color:var(--blue)}
+.contact-box a:hover{text-decoration:underline}
 
-footer{background:#071e35;padding:2rem;text-align:center;font-size:.8rem;color:rgba(255,255,255,.3);font-weight:300;margin-top:0}
+footer{background:#071e35;padding:2rem;text-align:center;font-size:.8rem;color:rgba(255,255,255,.3);font-weight:300;margin-top:3rem}
 footer a{color:rgba(255,255,255,.3)}
-footer a:hover{color:var(--gold-lt);text-decoration:none}
-
-@media(max-width:600px){
-  nav{padding:0 1.2rem}
-  .content{padding:2.5rem 1.2rem}
-}
+footer a:hover{color:var(--gold-lt)}
+@media(max-width:600px){nav{padding:0 1.2rem}.content{padding:2.5rem 1.2rem}}
 </style>
-
-<!-- Favicon -->
-<link rel="icon" type="image/x-icon" href="favicon.ico"/>
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"/>
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
-<meta name="theme-color" content="#0f3660"/>
 </head>
 <body>
-
 <nav>
   <div class="nav-logo">
     <img src="logo.png" alt="NKC Logo"/>
@@ -74,126 +61,132 @@ footer a:hover{color:var(--gold-lt);text-decoration:none}
   </div>
   <a href="index.html" class="nav-back">← Zurück zur Startseite</a>
 </nav>
-
 <div class="hero-bar">
   <p class="page-label">Unser Verein</p>
   <h1>Der <em>Vorstand</em></h1>
   <p>Die Menschen, die den NKC Neuwied am Laufen halten — ehrenamtlich und mit Herzblut.</p>
 </div>
-
 <div class="content">
-
   <div class="board-grid">
 
+    <!-- 1. Vorsitzender -->
     <div class="board-card first">
-      <div class="board-role">1. Vorsitzender</div>
-      <div class="board-name">Martin Klein</div>
-      <div class="board-contacts">
-        <div class="board-contact">
-          <span class="contact-icon">📞</span>
-          <span>Telefon auf Anfrage</span>
-        </div>
-        <div class="board-contact">
-          <span class="contact-icon">✉️</span>
-          <a href="mailto:1.Vorsitzender@nkc-neuwied.de">1.Vorsitzender@nkc-neuwied.de</a>
-        </div>
+      <div class="board-photo">
+        <!-- Place photo at img/vorstand/martin-klein.jpg -->
+        <img src="img/vorstand/martin-klein.jpg" alt="Martin Klein"
+             onerror="this.parentElement.innerHTML='<span class=\'board-photo-placeholder\'>👤</span>'"/>
+      </div>
+      <div class="board-body">
+        <div class="board-role">1. Vorsitzender</div>
+        <div class="board-name">Martin Klein</div>
       </div>
     </div>
 
+    <!-- 2. Vorsitzender -->
     <div class="board-card">
-      <div class="board-role">2. Vorsitzender</div>
-      <div class="board-name">Klaus Heyduczek</div>
-      <div class="board-contacts">
-        <div class="board-contact">
-          <span class="contact-icon">✉️</span>
-          <a href="mailto:2.Vorsitzender@nkc-neuwied.de">2.Vorsitzender@nkc-neuwied.de</a>
-        </div>
+      <div class="board-photo">
+        <img src="img/vorstand/klaus-heyduczek.png" alt="Klaus Heyduczek"
+             onerror="this.parentElement.innerHTML='<span class=\'board-photo-placeholder\'>👤</span>'"/>
+      </div>
+      <div class="board-body">
+        <div class="board-role">2. Vorsitzender</div>
+        <div class="board-name">Klaus Heyduczek</div>
       </div>
     </div>
 
+    <!-- Kassenwart -->
     <div class="board-card">
-      <div class="board-role">Kassenwart</div>
-      <div class="board-name">Richard Korscheid</div>
-      <div class="board-contacts">
-        <div class="board-contact">
-          <span class="contact-icon">✉️</span>
-          <a href="mailto:Kassenwart@nkc-neuwied.de">Kassenwart@nkc-neuwied.de</a>
-        </div>
+      <div class="board-photo">
+        <img src="img/vorstand/richard-korscheid.jpg" alt="Richard Korscheid"
+             onerror="this.parentElement.innerHTML='<span class=\'board-photo-placeholder\'>👤</span>'"/>
+      </div>
+      <div class="board-body">
+        <div class="board-role">Kassenwart</div>
+        <div class="board-name">Richard Korscheid</div>
       </div>
     </div>
 
+    <!-- Schriftwart -->
     <div class="board-card">
-      <div class="board-role">Schriftwart</div>
-      <div class="board-name">Rainer Molitor</div>
-      <div class="board-contacts">
-        <div class="board-contact">
-          <span class="contact-icon">✉️</span>
-          <a href="mailto:Schriftwart@nkc-neuwied.de">Schriftwart@nkc-neuwied.de</a>
-        </div>
+      <div class="board-photo">
+        <img src="img/vorstand/rainer-molitor.png" alt="Rainer Molitor"
+             onerror="this.parentElement.innerHTML='<span class=\'board-photo-placeholder\'>👤</span>'"/>
+      </div>
+      <div class="board-body">
+        <div class="board-role">Schriftwart</div>
+        <div class="board-name">Rainer Molitor</div>
       </div>
     </div>
 
+    <!-- Wanderwart -->
     <div class="board-card">
-      <div class="board-role">Wanderwart</div>
-      <div class="board-name">Volker Robbert</div>
-      <div class="board-contacts">
-        <div class="board-contact">
-          <span class="contact-icon">✉️</span>
-          <a href="mailto:Wanderwart@nkc-neuwied.de">Wanderwart@nkc-neuwied.de</a>
-        </div>
+      <div class="board-photo">
+        <img src="img/vorstand/volker-robbert.jpg" alt="Volker Robbert"
+             onerror="this.parentElement.innerHTML='<span class=\'board-photo-placeholder\'>👤</span>'"/>
+      </div>
+      <div class="board-body">
+        <div class="board-role">Wanderwart</div>
+        <div class="board-name">Volker Robbert</div>
       </div>
     </div>
 
+    <!-- Sportwart -->
     <div class="board-card">
-      <div class="board-role">Sportwart</div>
-      <div class="board-name">Benjamin Klein</div>
-      <div class="board-contacts">
-        <div class="board-contact">
-          <span class="contact-icon">✉️</span>
-          <a href="mailto:Sportwart@nkc-neuwied.de">Sportwart@nkc-neuwied.de</a>
-        </div>
+      <div class="board-photo">
+        <img src="img/vorstand/benjamin-klein.png" alt="Benjamin Klein"
+             onerror="this.parentElement.innerHTML='<span class=\'board-photo-placeholder\'>👤</span>'"/>
+      </div>
+      <div class="board-body">
+        <div class="board-role">Sportwart</div>
+        <div class="board-name">Benjamin Klein</div>
       </div>
     </div>
 
+    <!-- Umweltwart -->
     <div class="board-card">
-      <div class="board-role">Umweltwart</div>
-      <div class="board-name">Casper Sklenar</div>
-      <div class="board-contacts">
-        <div class="board-contact">
-          <span class="contact-icon">✉️</span>
-          <a href="mailto:Umweltwart@nkc-neuwied.de">Umweltwart@nkc-neuwied.de</a>
-        </div>
+      <div class="board-photo">
+        <img src="img/vorstand/casper-sklenar.png" alt="Casper Sklenar"
+             onerror="this.parentElement.innerHTML='<span class=\'board-photo-placeholder\'>👤</span>'"/>
+      </div>
+      <div class="board-body">
+        <div class="board-role">Umweltwart</div>
+        <div class="board-name">Casper Sklenar</div>
       </div>
     </div>
 
+    <!-- Hauswart -->
     <div class="board-card">
-      <div class="board-role">Hauswart</div>
-      <div class="board-name">Dominik Bolz</div>
-      <div class="board-contacts">
-        <div class="board-contact">
-          <span class="contact-icon">📞</span>
-          <span>Telefon auf Anfrage</span>
-        </div>
-        <div class="board-contact">
-          <span class="contact-icon">✉️</span>
-          <a href="mailto:Hauswart@nkc-neuwied.de">Hauswart@nkc-neuwied.de</a>
-        </div>
+      <div class="board-photo">
+        <img src="img/vorstand/dominik-bolz.png" alt="Dominik Bolz"
+             onerror="this.parentElement.innerHTML='<span class=\'board-photo-placeholder\'>👤</span>'"/>
+      </div>
+      <div class="board-body">
+        <div class="board-role">Hauswart</div>
+        <div class="board-name">Dominik Bolz</div>
+      </div>
+    </div>
+
+    <!-- Beisitzerin — NEW -->
+    <div class="board-card">
+      <div class="board-photo">
+        <img src="img/vorstand/antje-saebel.jpg" alt="Antje Saebel"
+             onerror="this.parentElement.innerHTML='<span class=\'board-photo-placeholder\'>👤</span>'"/>
+      </div>
+      <div class="board-body">
+        <div class="board-role">Beisitzerin</div>
+        <div class="board-name">Antje Saebel</div>
       </div>
     </div>
 
   </div>
 
-  <div class="info-box">
-    <h3>Allgemeiner Kontakt</h3>
+  <div class="contact-box">
+    <h3>Kontakt zum Vorstand</h3>
     <p>
-      Für allgemeine Anfragen, Schnupperpaddeln und Mitgliedschaft:<br/>
-      ✉️ <a href="mailto:gaeste@nkc-neuwied.de">gaeste@nkc-neuwied.de</a> &nbsp;·&nbsp;
-      📞 <a href="tel:+491606306402">+49 160 6306402</a> &nbsp;·&nbsp;
-      💬 <a href="https://wa.me/491606306402" target="_blank" rel="noopener">WhatsApp</a><br/><br/>
-      Neuwieder Kanu-Club e.V. · Rheinstraße 56 · 56564 Neuwied · Rhein-km 608
+      Für Fragen, Mitgliedschaft und Schnupperpaddeln:<br/>
+      ✉️ <a href="mailto:martin.klein1979@web.de">martin.klein1979@web.de</a>
     </p>
   </div>
-
 </div>
 
 <footer>
@@ -202,6 +195,5 @@ footer a:hover{color:var(--gold-lt);text-decoration:none}
   <a href="impressum.html">Impressum</a> ·
   <a href="datenschutz.html">Datenschutz</a>
 </footer>
-
 </body>
 </html>

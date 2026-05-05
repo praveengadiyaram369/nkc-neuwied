@@ -445,14 +445,27 @@ footer{background:#071e35;padding:4rem 0 2rem}
 }
 @media(max-width:768px){
   .photo-strip{grid-template-columns:repeat(3,1fr)}
-  .photo-strip-item:nth-child(4),.photo-strip-item:nth-child(5){display:none}
-  .photo-strip-more{display:none}
+  .photo-strip-item:nth-child(4){display:none}
+  .photo-strip-more{display:block !important}
   .lightbox-prev{left:.5rem}
   .lightbox-next{right:.5rem}
 }
 @media(max-width:480px){
   .photo-strip{grid-template-columns:repeat(2,1fr)}
-  .photo-strip-item:nth-child(3){display:none}
+  .photo-strip-item:nth-child(3){display:block}
+  .photo-strip-more .more-label span{font-size:1.2rem}
+}
+
+/* ── STACKED IMAGES (Über uns) ── */
+.stacked-imgs{display:flex;flex-direction:column;gap:1rem;height:100%}
+.stacked-img-top,.stacked-img-bottom{overflow:hidden;border-radius:2px;box-shadow:0 8px 30px rgba(42,122,191,.15)}
+.stacked-img-top{height:280px}
+.stacked-img-bottom{height:220px}
+.stacked-img-top img,.stacked-img-bottom img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.stacked-img-top:hover img,.stacked-img-bottom:hover img{transform:scale(1.04)}
+@media(max-width:1024px){
+  .stacked-img-top{height:220px}
+  .stacked-img-bottom{height:180px}
 }
 </style>
 </head>
@@ -486,7 +499,7 @@ footer{background:#071e35;padding:4rem 0 2rem}
   <a href="#ueber-uns" onclick="closeMenu()">Über uns</a>
   <a href="#aktivitaeten" onclick="closeMenu()">Aktivitäten</a>
   <a href="galerie.html" onclick="closeMenu()">Galerie</a>
-  <a href="#termine" onclick="closeMenu()">Termine 2025</a>
+  <a href="#termine" onclick="closeMenu()">Termine 2026</a>
   <a href="#mitglied" onclick="closeMenu()">Mitglied werden</a>
   <a href="#anfahrt" onclick="closeMenu()">Anfahrt</a>
   <a href="vorstand.html" onclick="closeMenu()">Vorstand</a>
@@ -502,7 +515,7 @@ footer{background:#071e35;padding:4rem 0 2rem}
   <div class="hero-content">
     <p class="hero-eyebrow">Neuwieder Kanu-Club e.V. · Am Rhein · Gegründet 1920</p>
     <h1 class="hero-title">Willkommen beim<br><em>NKC Neuwied</em>.</h1>
-    <p class="hero-sub">Seit über 100 Jahren paddeln wir auf dem Rhein — direkt am Pegelturm in Neuwied. Kanadier, Kajak, Jugend, Touren: Der NKC ist dein Verein am Wasser.</p>
+    <p class="hero-sub">Seit über 100 Jahren paddeln wir auf Flüssen in Deutschland und Europa — Kanadier, Kajak, Wanderfahrten und mehr. Komm vorbei und paddle mit uns!</p>
     <div class="hero-btns">
       <a href="#mitglied" class="btn btn-red">Mitglied werden</a>
       <a href="#ueber-uns" class="btn btn-ghost">Unser Verein</a>
@@ -523,8 +536,8 @@ footer{background:#071e35;padding:4rem 0 2rem}
 <!-- QUICKLINKS -->
 <div class="quicklinks">
   <a href="#aktivitaeten" class="ql-item"><div class="ql-icon">🚣</div><div class="ql-text"><strong>Kanu &amp; Kajak</strong><span>Wandern &amp; Wildwasser</span></div></a>
-  <a href="#termine" class="ql-item"><div class="ql-icon">📅</div><div class="ql-text"><strong>Jahresprogramm</strong><span>Touren &amp; Events 2025</span></div></a>
-  <a href="#mitglied" class="ql-item"><div class="ql-icon">🤝</div><div class="ql-text"><strong>Mitglied werden</strong><span>Schnupperpaddeln</span></div></a>
+  <a href="#termine" class="ql-item"><div class="ql-icon">📅</div><div class="ql-text"><strong>Jahresprogramm</strong><span>Touren &amp; Events 2026</span></div></a>
+  <a href="#mitglied" class="ql-item"><div class="ql-icon">🤝</div><div class="ql-text"><strong>Mitglied werden</strong><span>Jetzt beitreten</span></div></a>
   <a href="https://www.kanu-efb.de/" target="_blank" rel="noopener" class="ql-item"><div class="ql-icon">📔</div><div class="ql-text"><strong>eFB Fahrtenbuch</strong><span>Elektronisch</span></div></a>
   <a href="#anfahrt" class="ql-item"><div class="ql-icon">📍</div><div class="ql-text"><strong>Bootshaus</strong><span>Rheinstr. 56, Neuwied</span></div></a>
 </div>
@@ -534,8 +547,8 @@ footer{background:#071e35;padding:4rem 0 2rem}
   <div class="container">
     <div class="welcome-grid">
       <div class="reveal">
-        <p class="section-label">Ein Verein stellt sich vor</p>
-        <h2 class="section-title">Über <em>100 Jahre</em><br>auf dem Rhein.</h2>
+        <p class="section-label">Unsere Geschichte</p>
+        <h2 class="section-title">Die Geschichte<br>des <em>NKC Neuwied</em>.</h2>
         <p class="section-body">Bei uns reicht das Spektrum vom gemütlichen Wanderfahren bis zum sportlichen Kanusport. Regelmäßig sind wir auf dem Rhein, der Lahn, dem Wiedstausee und Flüssen in ganz Deutschland unterwegs.</p>
         <div class="history-timeline">
           <div class="ht-item"><div class="ht-year">1920</div><div class="ht-text">Gründung des Neuwieder Kanu-Clubs. Erste Wanderfahrten und Regatten auf selbstgebauten Booten — für die heutige Zeit kaum vorstellbar.</div></div>
@@ -546,22 +559,14 @@ footer{background:#071e35;padding:4rem 0 2rem}
           <div class="ht-item"><div class="ht-year">1999</div><div class="ht-text">Kooperation mit der Stadt Neuwied: Das Bootshaus erhält ein weiteres Stockwerk — als Kindergarten! Einzigartig in Deutschland.</div></div>
         </div>
       </div>
-      <div class="welcome-right reveal rd2">
-        <div class="info-card">
-          <h3>So ist es heute</h3>
-          <p>Im Sommer steht der aktive Sportbetrieb im Vordergrund. Beim Clubabend donnerstags und freitags werden Fahrten für das Wochenende geplant — auf dem Rhein, der Lahn, der Mosel und vielen anderen Flüssen.</p>
-        </div>
-        <div class="info-card">
-          <h3>Jugendarbeit</h3>
-          <p>Viel Herzblut geht in unsere Jugendarbeit. Im Winter: Jugendstunden im Bootshaus und Hallentraining im Schwimmbad Feldkirchen (donnerstags) — Eskimotieren, Ein-/Aussteigen, Bootsbeherrschung.</p>
-        </div>
-        <div class="info-card red">
-          <h3>🏫 Der einzige Kanuclub mit Kindergarten</h3>
-          <p>Direkt an den Goethe-Anlagen am Rhein — unser Bootshaus beherbergt einen Kindergarten. Einmalig in ganz Deutschland!</p>
-        </div>
-        <div class="info-card">
-          <h3>Für uns ist Paddeln…</h3>
-          <p><em>"einfach nur Spaß · gemeinsam etwas erleben · gemütlich beisammensein"</em></p>
+      <div class="reveal rd2">
+        <div class="stacked-imgs">
+          <div class="stacked-img-top">
+            <img src="img/old_homepage/nkc2.jpg" alt="NKC Neuwied Bootshaus" loading="lazy"/>
+          </div>
+          <div class="stacked-img-bottom">
+            <img src="img/old_homepage/nkc3.jpg" alt="Paddeln auf dem Rhein" loading="lazy"/>
+          </div>
         </div>
       </div>
     </div>
@@ -573,7 +578,7 @@ footer{background:#071e35;padding:4rem 0 2rem}
   <div class="container">
     <div class="stats-grid">
       <div class="reveal"><div class="stat-num"><span>1920</span></div><div class="stat-label">Gegründet</div></div>
-      <div class="reveal rd1"><div class="stat-num">100<span>+</span></div><div class="stat-label">Aktive Mitglieder</div></div>
+      <div class="reveal rd1"><div class="stat-num">50<span>+</span></div><div class="stat-label">Aktive Mitglieder</div></div>
       <div class="reveal rd2"><div class="stat-num">20<span>+</span></div><div class="stat-label">Touren pro Jahr</div></div>
       <div class="reveal rd3"><div class="stat-num">Rhein</div><div class="stat-label">Direkt am Wasser</div></div>
     </div>
@@ -585,10 +590,10 @@ footer{background:#071e35;padding:4rem 0 2rem}
   <div class="container">
     <div class="social-inner">
       <span class="social-label">Folge uns</span>
-      <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="social-btn s-ig">📷 Instagram</a>
-      <a href="https://www.facebook.com/" target="_blank" rel="noopener" class="social-btn s-fb">Facebook</a>
-      <a href="https://www.youtube.com/" target="_blank" rel="noopener" class="social-btn s-yt">▶ YouTube</a>
-      <a href="https://wa.me/491606306402" target="_blank" rel="noopener" class="social-btn s-wa">💬 WhatsApp</a>
+      <a href="#" onclick="return false;" class="social-btn s-ig" style="opacity:.4;cursor:not-allowed;pointer-events:none">📷 Instagram</a>
+      <a href="https://facebook.com/share/1AwPfMUaW2/?ref=1" target="_blank" rel="noopener" class="social-btn s-fb">Facebook</a>
+      <a href="#" onclick="return false;" class="social-btn s-yt" style="opacity:.4;cursor:not-allowed;pointer-events:none">▶ YouTube</a>
+      
     </div>
     <p class="social-note">📸 Fotos und Videos von Paddeltouren, Ausflügen und Events findest du auf unseren Social-Media-Kanälen — folge uns für frische Bilder direkt vom Rhein!</p>
   </div>
@@ -618,20 +623,20 @@ footer{background:#071e35;padding:4rem 0 2rem}
       <div class="act-card reveal rd2">
         <div class="act-icon">🌊</div>
         <div class="act-title">Leichtes Wildwasser</div>
-        <div class="act-desc">Adrenalin und Technik auf ruhigeren Wildwasserstrecken. Sicher begleitet durch erfahrene Vereinsmitglieder.</div>
+        <div class="act-desc">Adrenalin und Technik auf Wildwasserstrecken in der Region. Sicher begleitet durch erfahrene Vereinsmitglieder.</div>
         <div class="act-tags"><span class="act-tag">Fortgeschrittene</span><span class="act-tag">Abenteuer</span></div>
       </div>
-      <div class="act-card red reveal rd1">
-        <div class="act-icon">👧</div>
-        <div class="act-title">Jugend &amp; Kinder</div>
-        <div class="act-desc">Paddeln auf Rhein, Lahn und Wiedstausee. Wintertraining im Schwimmbad Feldkirchen donnerstags. Eskimotieren, Bootsbeherrschung — Spaß pur!</div>
-        <div class="act-tags"><span class="act-tag">Jugend</span><span class="act-tag">Kinder</span><span class="act-tag">Ganzjährig</span></div>
+            <div class="act-card red reveal rd1">
+        <div class="act-icon">🏊</div>
+        <div class="act-title">Schwimmen &amp; Rollen</div>
+        <div class="act-desc">Wintertraining donnerstags ab 20:00 Uhr im Schwimmbad — Eskimotieren, Rollen, Bootsbeherrschung und Ein-/Aussteigen für alle Mitglieder.</div>
+        <div class="act-tags"><span class="act-tag">Donnerstag</span><span class="act-tag">Ab 20:00 Uhr</span><span class="act-tag">Winter</span></div>
       </div>
-      <div class="act-card red reveal rd2">
-        <div class="act-icon">🗺️</div>
-        <div class="act-title">Wochenend-Touren</div>
-        <div class="act-desc">Donnerstags und freitags abends planen wir gemeinsam die Fahrten für das Wochenende — spontan, gesellig, auf vielen Flüssen in Deutschland und im Ausland.</div>
-        <div class="act-tags"><span class="act-tag">Wochenende</span><span class="act-tag">Gemeinschaft</span><span class="act-tag">Ausland</span></div>
+            <div class="act-card red reveal rd2">
+        <div class="act-icon">🦺</div>
+        <div class="act-title">Sicherheitstraining</div>
+        <div class="act-desc">In regelmäßigen Abständen üben wir besondere Situationen im Wasser, Erste Hilfe und Anhänger-Schulung — damit alle sicher unterwegs sind.</div>
+        <div class="act-tags"><span class="act-tag">Erste Hilfe</span><span class="act-tag">Anhänger</span><span class="act-tag">Regelmäßig</span></div>
       </div>
       <div class="act-card red reveal rd3">
         <div class="act-icon">🥾</div>
@@ -695,7 +700,7 @@ footer{background:#071e35;padding:4rem 0 2rem}
 <div class="parallax-cta">
   <div class="parallax-cta-content">
     <p class="section-label">Bereit für dein Abenteuer?</p>
-    <h2>Erlebe den Rhein<br>von seiner <em>schönsten</em> Seite.</h2>
+    <h2>Erlebe die <em>Flüsse</em><br>von ihrer schönsten Seite.</h2>
     <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
       <a href="#mitglied" class="btn btn-red">Jetzt Mitglied werden</a>
       <a href="#kontakt" class="btn btn-ghost">Schreib uns</a>
@@ -707,8 +712,8 @@ footer{background:#071e35;padding:4rem 0 2rem}
 <section class="section termine" id="termine">
   <div class="container">
     <div class="reveal">
-      <p class="section-label">Jahresprogramm 2025</p>
-      <h2 class="section-title">Termine &amp;<br><em>Veranstaltungen</em></h2>
+      <p class="section-label">Jahresprogramm 2026</p>
+      <h2 class="section-title">Termine &amp;<br><em>Veranstaltungen 2026</em></h2>
       <p class="section-body">Alle geplanten Touren, Trainings und Club-Events auf einen Blick. Kurzfristige Änderungen werden hier und per E-Mail bekannt gegeben.</p>
     </div>
 
@@ -726,95 +731,116 @@ footer{background:#071e35;padding:4rem 0 2rem}
         </thead>
         <tbody>
           <tr>
-            <td class="td-date">März 2025</td>
-            <td class="td-event">Rheintour Braubach – Neuwied<small>Treffpunkt 9:00 Uhr Bootshaus · Anmeldung: gaeste@nkc-neuwied.de</small></td>
+            <td class="td-date">Sa, 04.04.2026</td>
+            <td class="td-event">Anpaddeln – Rheintour<small>Start in die Saison 2026 · Details auf Anfrage</small></td>
             <td><span class="badge b-tour">Tour</span></td>
             <td class="td-loc">Rhein</td>
-            <td><span class="s-plan">Geplant</span></td>
+            <td><span class="s-ok">✓ Geplant</span></td>
           </tr>
           <tr>
-            <td class="td-date">April 2025</td>
-            <td class="td-event">Frühjahrstour Lahn<small>Mehrtägige Wanderfahrt · Details beim Clubabend</small></td>
+            <td class="td-date">So, 19.04.2026</td>
+            <td class="td-event">KVR-Anpaddeln<small>Gemeinsames Anpaddeln im Kanuverband Rheinland</small></td>
+            <td><span class="badge b-event">Event</span></td>
+            <td class="td-loc">Rhein</td>
+            <td><span class="s-ok">✓ Geplant</span></td>
+          </tr>
+          <tr>
+            <td class="td-date">Fr, 01.05.2026</td>
+            <td class="td-event">Lahntour – Anfänger &amp; Schnupperpaddeln<small>Idealer Einstieg für Neulinge · Ruhiges Wasser · Anmeldung per E-Mail</small></td>
             <td><span class="badge b-tour">Tour</span></td>
             <td class="td-loc">Lahn</td>
-            <td><span class="s-plan">In Planung</span></td>
+            <td><span class="s-ok">✓ Geplant</span></td>
           </tr>
           <tr>
-            <td class="td-date">Mai 2025</td>
-            <td class="td-event">Jugend-Ausfahrt Wiedstausee<small>Paddeln für Kinder und Jugendliche auf ruhigem Wasser</small></td>
-            <td><span class="badge b-jugend">Jugend</span></td>
-            <td class="td-loc">Wiedstausee, Altwied</td>
-            <td><span class="s-plan">Geplant</span></td>
-          </tr>
-          <tr>
-            <td class="td-date">Juni 2025</td>
-            <td class="td-event">Clubfest am Bootshaus<small>Sommerfest für alle Mitglieder und Freunde des NKC</small></td>
+            <td class="td-date">Sa, 16.05.2026</td>
+            <td class="td-event">Arbeitseinsatz – Bootshaus &amp; Säuberung<small>Ab 10:00 Uhr · Gemeinsam aufräumen und das Bootshaus fit machen</small></td>
             <td><span class="badge b-event">Event</span></td>
             <td class="td-loc">Bootshaus Neuwied</td>
-            <td><span class="s-plan">Geplant</span></td>
+            <td><span class="s-ok">✓ Geplant</span></td>
           </tr>
           <tr>
-            <td class="td-date">Juli 2025</td>
-            <td class="td-event">Mehrtages-Wanderfahrt Ausland<small>Jährliche Auslandsfahrt · Ziel wird beim Clubabend bekannt gegeben</small></td>
+            <td class="td-date">So, 17.05.2026</td>
+            <td class="td-event">Lahntour<small>Ab 9:00 Uhr · Anmeldung per E-Mail</small></td>
             <td><span class="badge b-tour">Tour</span></td>
-            <td class="td-loc">Ausland / TBD</td>
-            <td><span class="s-plan">In Planung</span></td>
+            <td class="td-loc">Lahn</td>
+            <td><span class="s-ok">✓ Geplant</span></td>
           </tr>
           <tr>
-            <td class="td-date">Aug 2025</td>
-            <td class="td-event">Gebrauchtbootemarkt<small>Kauf und Verkauf von gebrauchten Kanus und Kajaks</small></td>
+            <td class="td-date">So, 24.05.2026</td>
+            <td class="td-event">Rheintour<small>Ab 9:00 Uhr · Anmeldung per E-Mail</small></td>
+            <td><span class="badge b-tour">Tour</span></td>
+            <td class="td-loc">Rhein</td>
+            <td><span class="s-ok">✓ Geplant</span></td>
+          </tr>
+          <tr>
+            <td class="td-date">So, 28.06.2026</td>
+            <td class="td-event">Lahn- / Rheintour<small>Ab 9:00 Uhr · Alternativ Rhein · Anmeldung per E-Mail</small></td>
+            <td><span class="badge b-tour">Tour</span></td>
+            <td class="td-loc">Lahn / Rhein</td>
+            <td><span class="s-ok">✓ Geplant</span></td>
+          </tr>
+          <tr>
+            <td class="td-date">So, 19.07.2026</td>
+            <td class="td-event">Sommergrillen &amp; Kajaktour<small>Geselliges Sommerfest mit anschließender Kajakrunde</small></td>
             <td><span class="badge b-event">Event</span></td>
-            <td class="td-loc">Bootshaus Neuwied</td>
-            <td><span class="s-plan">Geplant</span></td>
+            <td class="td-loc">Bootshaus / Rhein</td>
+            <td><span class="s-ok">✓ Geplant</span></td>
           </tr>
           <tr>
-            <td class="td-date">Sep 2025</td>
-            <td class="td-event">Sicherheitstraining<small>Eskimotieren, Selbstrettung, Wildwassertechnik für alle Niveaus</small></td>
+            <td class="td-date">Sa, 08.08.2026</td>
+            <td class="td-event">Sicherheitstraining mit Erste-Hilfe-Kurs<small>Ab 10:00 Uhr · Pflichttermin empfohlen für alle Mitglieder</small></td>
             <td><span class="badge b-train">Training</span></td>
-            <td class="td-loc">Rhein / Bootshaus</td>
-            <td><span class="s-plan">Geplant</span></td>
+            <td class="td-loc">Bootshaus / Rhein</td>
+            <td><span class="s-ok">✓ Geplant</span></td>
           </tr>
           <tr>
-            <td class="td-date">Sep 2025</td>
-            <td class="td-event">Seniorentour<small>Mehrtägige gemütliche Paddeltour für erfahrene Mitglieder</small></td>
+            <td class="td-date">So, 06.09.2026</td>
+            <td class="td-event">Lahntour – Anfänger &amp; Schnupperpaddeln<small>Zweiter Schnuppertermin im Jahr · Anmeldung per E-Mail</small></td>
             <td><span class="badge b-tour">Tour</span></td>
-            <td class="td-loc">Rhein / TBD</td>
-            <td><span class="s-plan">Geplant</span></td>
+            <td class="td-loc">Lahn</td>
+            <td><span class="s-ok">✓ Geplant</span></td>
           </tr>
           <tr>
-            <td class="td-date">Sep 2025</td>
-            <td class="td-event">KVR Abpaddeln<small>Gemeinsames Abpaddeln im Kanuverband Rheinland</small></td>
-            <td><span class="badge b-event">Event</span></td>
-            <td class="td-loc">Rhein</td>
-            <td><span class="s-plan">Geplant</span></td>
-          </tr>
-          <tr>
-            <td class="td-date">Sep 2025</td>
-            <td class="td-event">CleanUp-Day am Rhein<small>Paddeln und gleichzeitig den Rhein sauber halten</small></td>
-            <td><span class="badge b-event">Event</span></td>
-            <td class="td-loc">Rhein, Neuwied</td>
-            <td><span class="s-plan">Geplant</span></td>
-          </tr>
-          <tr>
-            <td class="td-date">Okt 2025</td>
-            <td class="td-event">Herbst-Rheintour<small>Letzte große Saisontour — Abpaddeln der Saison</small></td>
+            <td class="td-date">So, 20.09.2026</td>
+            <td class="td-event">Rheintour<small>Anmeldung per E-Mail</small></td>
             <td><span class="badge b-tour">Tour</span></td>
             <td class="td-loc">Rhein</td>
-            <td><span class="s-plan">Geplant</span></td>
+            <td><span class="s-ok">✓ Geplant</span></td>
           </tr>
           <tr>
-            <td class="td-date">Nov 2025</td>
-            <td class="td-event">Jahreshauptversammlung<small>Alle Mitglieder herzlich eingeladen · Ort und Zeit werden bekannt gegeben</small></td>
-            <td><span class="badge b-jhv">JHV</span></td>
-            <td class="td-loc">Bootshaus Neuwied</td>
-            <td><span class="s-plan">Geplant</span></td>
-          </tr>
-          <tr>
-            <td class="td-date">Dez 2025</td>
-            <td class="td-event">Weihnachtsfeier<small>Gesellige Weihnachtsfeier — eine gute Tradition seit 1920</small></td>
+            <td class="td-date">So, 27.09.2026</td>
+            <td class="td-event">Abpaddeln<small>Saisonabschluss · Gemeinsames Abpaddeln auf dem Rhein</small></td>
             <td><span class="badge b-event">Event</span></td>
-            <td class="td-loc">Bootshaus Neuwied</td>
-            <td><span class="s-plan">Geplant</span></td>
+            <td class="td-loc">Rhein</td>
+            <td><span class="s-ok">✓ Geplant</span></td>
+          </tr>
+          <tr>
+            <td class="td-date">So, 11.10.2026</td>
+            <td class="td-event">Abpaddeln – Rheintour<small>Letzte große Saisontour auf dem Rhein</small></td>
+            <td><span class="badge b-tour">Tour</span></td>
+            <td class="td-loc">Rhein</td>
+            <td><span class="s-ok">✓ Geplant</span></td>
+          </tr>
+          <tr>
+            <td class="td-date">So, 01.11.2026</td>
+            <td class="td-event">Rheintour<small>Herbstliche Rheinfahrt · Anmeldung per E-Mail</small></td>
+            <td><span class="badge b-tour">Tour</span></td>
+            <td class="td-loc">Rhein</td>
+            <td><span class="s-ok">✓ Geplant</span></td>
+          </tr>
+          <tr>
+            <td class="td-date">So, 08.11.2026</td>
+            <td class="td-event">Wanderung<small>Herbstwanderung in der Region · Details auf Anfrage</small></td>
+            <td><span class="badge b-event">Event</span></td>
+            <td class="td-loc">Region Neuwied</td>
+            <td><span class="s-ok">✓ Geplant</span></td>
+          </tr>
+          <tr>
+            <td class="td-date">So, 29.11.2026</td>
+            <td class="td-event">Herbsttour<small>Abschluss der Saison · Anmeldung per E-Mail</small></td>
+            <td><span class="badge b-tour">Tour</span></td>
+            <td class="td-loc">Rhein / Lahn</td>
+            <td><span class="s-ok">✓ Geplant</span></td>
           </tr>
         </tbody>
       </table>
@@ -826,9 +852,9 @@ footer{background:#071e35;padding:4rem 0 2rem}
         <span><span class="badge b-jhv">JHV</span> Jahreshauptversammlung</span>
       </div>
       <div class="cal-note">
-        📌 <strong>Hinweis:</strong> Alle Termine sind vorläufig. Änderungen und neue Termine werden hier aktualisiert und per E-Mail an alle Mitglieder kommuniziert.
+        📌 <strong>Hinweis:</strong> Alle Termine für die Saison 2026. Änderungen werden hier und per E-Mail kommuniziert.
         Vollständiges Programm auch im <a href="https://www.kanu-efb.de/" target="_blank" rel="noopener" style="color:var(--blue)">elektronischen Fahrtenbuch (eFB)</a>. ·
-        Kontakt: <a href="mailto:gaeste@nkc-neuwied.de" style="color:var(--blue)">gaeste@nkc-neuwied.de</a>
+        Kontakt: <a href="mailto:martin.klein1979@web.de" style="color:var(--blue)">martin.klein1979@web.de</a>
       </div>
     </div>
   </div>
@@ -845,17 +871,16 @@ footer{background:#071e35;padding:4rem 0 2rem}
         <ul class="member-list">
           <li class="member-item"><div class="mdot"></div>Nutzung aller Vereinsboote (Kanadier &amp; Kajak)</li>
           <li class="member-item"><div class="mdot"></div>Teilnahme an allen Touren &amp; Veranstaltungen</li>
-          <li class="member-item"><div class="mdot"></div>Clubabende donnerstags &amp; freitags am Bootshaus</li>
-          <li class="member-item"><div class="mdot"></div>Hallentraining im Schwimmbad Feldkirchen (Winter)</li>
-          <li class="member-item"><div class="mdot"></div>Aktives Jugend- und Kinderprogramm</li>
+          <li class="member-item"><div class="mdot"></div>Wöchentliches Schwimmtraining (Donnerstag ab 20:00 Uhr)</li>
+          <li class="member-item"><div class="mdot"></div>Eigenes Boot im Bootshaus einlagern</li>
           <li class="member-item"><div class="mdot"></div>Mitglied im Kanuverband Rheinland</li>
           <li class="member-item"><div class="mdot"></div>Gemeinschaft am schönsten Fluss Deutschlands</li>
         </ul>
         <div class="schnupper">
-          <p><strong style="color:#fff">Lust auf ein Schnupperpaddeln?</strong><br>Schau einfach beim Clubabend vorbei oder melde dich per E-Mail — wir zeigen dir alles und freuen uns auf dich!</p>
+          <p><strong style="color:#fff">Lust auf ein Schnupperpaddeln?</strong><br>Melde dich einfach per E-Mail — wir freuen uns auf dich und zeigen dir alles!</p>
           <div class="mbtns">
-            <a href="mailto:gaeste@nkc-neuwied.de" class="btn btn-red">Schnupperpaddeln anfragen</a>
-            <a href="tel:+491606306402" class="btn btn-ghost">📞 +49 160 6306402</a>
+            <a href="mailto:martin.klein1979@web.de" class="btn btn-red">Jetzt beitreten anfragen</a>
+            
           </div>
         </div>
       </div>
@@ -864,14 +889,12 @@ footer{background:#071e35;padding:4rem 0 2rem}
           <div class="fee-title">Mitgliedsbeiträge</div>
           <div class="fee-row"><span>Erwachsene</span><span class="fee-amt">Auf Anfrage</span></div>
           <div class="fee-row"><span>Jugendliche (bis 18 J.)</span><span class="fee-amt">Ermäßigt</span></div>
-          <div class="fee-row"><span>Familien</span><span class="fee-amt">Familientarif</span></div>
-          <div class="fee-row"><span>Senioren</span><span class="fee-amt">Ermäßigt</span></div>
-          <p style="margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.08);font-size:.8rem;color:rgba(255,255,255,.42);font-weight:300;line-height:1.75">Genaue Beiträge auf Anfrage per E-Mail oder direkt beim Clubabend (donnerstags / freitags).</p>
+          <p style="margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.08);font-size:.8rem;color:rgba(255,255,255,.42);font-weight:300;line-height:1.75">Genaue Beiträge auf Anfrage per E-Mail.</p>
         </div>
         <div style="margin-top:1rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:2px;padding:1.4rem">
           <p style="font-size:.7rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-lt);margin-bottom:.6rem">Satzung &amp; Mitgliedsantrag</p>
           <p style="font-size:.86rem;font-weight:300;color:rgba(255,255,255,.55);line-height:1.7">Vereinssatzung und Mitgliedsantrag sind auf Anfrage erhältlich.</p>
-          <a href="mailto:gaeste@nkc-neuwied.de" style="display:inline-block;margin-top:.7rem;font-size:.77rem;color:var(--gold-lt);letter-spacing:.08em">gaeste@nkc-neuwied.de →</a>
+          <a href="mailto:martin.klein1979@web.de" style="display:inline-block;margin-top:.7rem;font-size:.77rem;color:var(--gold-lt);letter-spacing:.08em">martin.klein1979@web.de →</a>
         </div>
       </div>
     </div>
@@ -885,24 +908,18 @@ footer{background:#071e35;padding:4rem 0 2rem}
       <div class="reveal">
         <p class="section-label">So findest du uns</p>
         <h2 class="section-title">Unser<br><em>Bootshaus</em>.</h2>
-        <p class="section-body">Direkt am Rheinufer, neben dem Pegelturm, an den Goethe-Anlagen. Komm beim nächsten Clubabend vorbei — donnerstags oder freitags.</p>
+        <p class="section-body">Direkt am Rheinufer, neben dem Pegelturm, an den Goethe-Anlagen. Komm einfach vorbei oder schreib uns eine E-Mail.</p>
         <div class="loc-details">
           <div class="loc-item">
             <span class="loc-icon">📍</span>
             <div><p class="loc-label">Adresse</p><p class="loc-value">Rheinstraße 56 · 56564 Neuwied<br>Rhein-km 608 · am Pegelturm</p></div>
           </div>
-          <div class="loc-item">
-            <span class="loc-icon">📞</span>
-            <div><p class="loc-label">Telefon</p><p class="loc-value"><a href="tel:+491606306402">+49 160 6306402</a></p></div>
-          </div>
+          
           <div class="loc-item">
             <span class="loc-icon">✉️</span>
-            <div><p class="loc-label">E-Mail</p><p class="loc-value"><a href="mailto:gaeste@nkc-neuwied.de">gaeste@nkc-neuwied.de</a></p></div>
+            <div><p class="loc-label">E-Mail</p><p class="loc-value"><a href="mailto:martin.klein1979@web.de">martin.klein1979@web.de</a></p></div>
           </div>
-          <div class="loc-item">
-            <span class="loc-icon">🕐</span>
-            <div><p class="loc-label">Clubabende</p><p class="loc-value">Donnerstags &amp; Freitags<br>Planung &amp; geselliges Beisammensein</p></div>
-          </div>
+          
           <div class="loc-item">
             <span class="loc-icon">🗺️</span>
             <div><p class="loc-label">Navigation</p><p class="loc-value"><a href="https://www.google.com/maps/search/Rheinstrasse+56+Neuwied" target="_blank" rel="noopener">In Google Maps öffnen →</a></p></div>
@@ -926,9 +943,7 @@ footer{background:#071e35;padding:4rem 0 2rem}
       <h2>Wir freuen uns auf<br>deine <em>Nachricht</em>.</h2>
       <p>Fragen zum Verein, zu Kursen oder Mitgliedschaft? Schreib uns oder ruf an — wir antworten schnell.</p>
       <div class="contact-methods">
-        <a href="mailto:gaeste@nkc-neuwied.de" class="btn btn-red">✉️ &nbsp;gaeste@nkc-neuwied.de</a>
-        <a href="tel:+491606306402" class="btn btn-ghost">📞 &nbsp;+49 160 6306402</a>
-        <a href="https://wa.me/491606306402" target="_blank" rel="noopener" class="btn btn-ghost">💬 &nbsp;WhatsApp</a>
+        <a href="mailto:martin.klein1979@web.de" class="btn btn-red">✉️ &nbsp;martin.klein1979@web.de</a>
       </div>
     </div>
   </div>
@@ -945,9 +960,9 @@ footer{background:#071e35;padding:4rem 0 2rem}
         </div>
         <p class="footer-desc">Mitglied im Kanuverband Rheinland. Paddeln, Gemeinschaft und Natur direkt am Rhein — gegründet 1920 in Neuwied.</p>
         <div class="footer-social">
-          <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="fs-ig" title="Instagram">📷</a>
-          <a href="https://www.facebook.com/" target="_blank" rel="noopener" class="fs-fb" title="Facebook" style="font-family:serif;font-weight:bold">f</a>
-          <a href="https://www.youtube.com/" target="_blank" rel="noopener" class="fs-yt" title="YouTube">▶</a>
+          <a href="#" onclick="return false;" class="fs-ig" style="opacity:.4;cursor:not-allowed;pointer-events:none" title="Instagram">📷</a>
+          <a href="https://facebook.com/share/1AwPfMUaW2/?ref=1" target="_blank" rel="noopener" class="fs-fb" title="Facebook" style="font-family:serif;font-weight:bold">f</a>
+          <a href="#" onclick="return false;" class="fs-yt" style="opacity:.4;cursor:not-allowed;pointer-events:none" title="YouTube">▶</a>
         </div>
       </div>
       <div class="footer-col">
@@ -956,7 +971,7 @@ footer{background:#071e35;padding:4rem 0 2rem}
           <li><a href="#ueber-uns">Über uns</a></li>
           <li><a href="#aktivitaeten">Aktivitäten</a></li>
     <li><a href="galerie.html">Galerie</a></li>
-          <li><a href="#termine">Termine 2025</a></li>
+          <li><a href="#termine">Termine 2026</a></li>
           <li><a href="galerie.html">Galerie</a></li>
           <li><a href="#mitglied">Mitglied werden</a></li>
           <li><a href="https://www.kanu-efb.de/" target="_blank" rel="noopener">eFB Fahrtenbuch</a></li>
@@ -977,15 +992,15 @@ footer{background:#071e35;padding:4rem 0 2rem}
       <div class="footer-col">
         <h4>Kontakt</h4>
         <ul class="footer-links">
-          <li><a href="mailto:gaeste@nkc-neuwied.de">gaeste@nkc-neuwied.de</a></li>
-          <li><a href="tel:+491606306402">+49 160 6306402</a></li>
-          <li><a href="https://wa.me/491606306402" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="mailto:martin.klein1979@web.de">martin.klein1979@web.de</a></li>
+          <li></li>
+          <li></li>
           <li><a href="https://www.kanuverband-rheinland.de" target="_blank" rel="noopener">Kanuverband Rheinland</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 Neuwieder Kanu-Club e.V. — Gegründet 1920</span>
+      <span>© 2026 Neuwieder Kanu-Club e.V. — Gegründet 1920</span>
       <span><a href="impressum.html" style="color:rgba(255,255,255,.28)">Impressum</a> · <a href="datenschutz.html" style="color:rgba(255,255,255,.28)">Datenschutz</a></span>
     </div>
   </div>
