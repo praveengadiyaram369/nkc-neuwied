@@ -2,8 +2,8 @@
 
 Official website for **Neuwieder Kanu-Club e.V.**, hosted for free on **Cloudflare Pages**.
 
-Live URL: [https://nkc-neuwied.de](https://nkc-neuwied.de)
-Repository: [https://github.com/praveengadiyaram369/nkc-neuwied](https://github.com/praveengadiyaram369/nkc-neuwied)
+**Live URL:** [https://nkc-neuwied.de](https://nkc-neuwied.de)
+**Repository:** [https://github.com/praveengadiyaram369/nkc-neuwied](https://github.com/praveengadiyaram369/nkc-neuwied)
 
 ---
 
@@ -11,134 +11,136 @@ Repository: [https://github.com/praveengadiyaram369/nkc-neuwied](https://github.
 
 ```
 nkc-neuwied/
-├── index.html         ← Main homepage
-├── vorstand.html      ← Board members / Vorstand
-├── pegeldienste.html  ← Water level links by German state
-├── impressum.html     ← Legal imprint (required in Germany)
-├── datenschutz.html   ← Privacy policy / DSGVO
-├── logo.jpeg          ← Original logo (backup)
-├── logo.png           ← Transparent PNG logo (used in website)
-├── README.md          ← This file — setup & maintenance guide
-└── AGENTS.md          ← AI assistant instructions for future updates
+├── index.html            ← Main homepage
+├── galerie.html          ← Photo gallery (dynamic, filter by category)
+├── vorstand.html         ← Board members with photos
+├── pegeldienste.html     ← Water level links by German state
+├── impressum.html        ← Legal imprint (required in Germany)
+├── datenschutz.html      ← Privacy policy / DSGVO
+├── 404.html              ← Friendly error page
+├── sitemap.xml           ← SEO sitemap
+├── robots.txt            ← Search engine instructions
+├── favicon.ico / favicon-32.png / favicon-16.png / apple-touch-icon.png
+├── logo.png              ← Club logo transparent PNG (used in site)
+├── logo.jpeg             ← Original logo backup
+│
+└── img/
+    ├── slider/
+    │   ├── images.json   ← ⭐ Edit to add/remove slider photos
+    │   └── slider1.jpg, slider2.jpg, ...
+    ├── gallery/
+    │   ├── images.json   ← ⭐ Edit to add/remove gallery photos
+    │   └── gallery1.jpg, gallery2.jpg, ...
+    ├── vorstand/
+    │   ├── martin-klein.jpg
+    │   ├── klaus-heyduczek.png
+    │   ├── rainer-molitor.png
+    │   ├── richard-korscheid.jpg
+    │   ├── volker-robbert.jpg
+    │   ├── benjamin-klein.png
+    │   ├── casper-sklenar.png
+    │   ├── dominik-bolz.png
+    │   └── Jennifer.png        ← Antje Saebel (Beisitzerin)
+    ├── old_homepage/
+    │   ├── nkc1.jpg            ← Über uns image 1
+    │   ├── nkc2.jpg            ← Über uns image 2
+    │   └── nkc3.jpg            ← Über uns image 3
+    └── parallax.jpg            ← Full-width parallax background
 ```
-
-> **Note:** This is a single-page website. All content, styles, and scripts
-> are in `index.html`. No build tools, no npm, no frameworks required.
 
 ---
 
-## 🚀 How to Deploy (First Time)
+## 🚀 Deployment & Cache
 
-### 1. Push to GitHub
-```bash
-git init
-git add .
-git commit -m "Initial website"
-git branch -M main
-git remote add origin https://github.com/praveengadiyaram369/nkc-neuwied.git
-git push -u origin main
-```
+Site deploys automatically on every `git push` via Cloudflare Pages (~60 seconds).
 
-### 2. Deploy on Cloudflare Pages
-1. Go to [https://pages.cloudflare.com](https://pages.cloudflare.com) and sign in
-2. Click **"Create a project"** → **"Connect to Git"**
-3. Select your `nkc-neuwied` repository
-4. Build settings:
-   - **Framework preset:** None
-   - **Build command:** *(leave empty)*
-   - **Build output directory:** `/` (root)
-5. Click **"Save and Deploy"**
-6. Your site is live at `nkc-neuwied.pages.dev` within 1–2 minutes
+**After pushing, purge the Cloudflare cache so all visitors see the update immediately:**
+1. [dash.cloudflare.com](https://dash.cloudflare.com) → your domain
+2. **Caching → Configuration → Purge Cache → Purge Everything**
 
-### 3. Connect your domain (nkc-neuwied.de)
-1. In Cloudflare Pages → your project → **"Custom domains"**
-2. Click **"Set up a custom domain"** → enter `nkc-neuwied.de`
-3. In IONOS: Domains & SSL → nkc-neuwied.de → **"Custom nameservers"**
-4. Enter the two Cloudflare nameservers shown (e.g. `brenda.ns.cloudflare.com`)
-5. Wait up to 24 hours for DNS propagation
+**Members with old cached pages:** press `Cmd+Shift+R` (Mac) or `Ctrl+Shift+R` (Windows).
 
 ---
 
-## ✏️ How to Update the Website
+## ✏️ Most Common Updates
 
-You **never need to touch code** for most updates. Just edit `index.html`
-in GitHub's web editor or in VS Code, then push. Cloudflare auto-deploys.
+### Update events (Termine)
+1. Open `index.html` on GitHub → click ✏️
+2. Find the `<tbody>` inside the calendar table (search for `td-date`)
+3. Edit dates and text → **Commit changes** → live in ~60 seconds
 
-### Common updates
+### Add a gallery photo
+1. Compress photo at [squoosh.app](https://squoosh.app) → save to `img/gallery/`
+2. Add one line to `img/gallery/images.json`:
+```json
+{"file": "myphoto.jpg", "alt": "Beschreibung", "cat": "touren"}
+```
+Categories: `touren` · `training` · `bootshaus` · `events`
 
-| What to change | Where in index.html | How |
-|---|---|---|
-| Event dates & text | Section `id="termine"` | Edit the `.event-body` blocks |
-| Club address / email | Section `id="anfahrt"` and `id="kontakt"` | Edit the text directly |
-| Hero slider text | `.hero-content` section | Edit h1, p tags |
-| Membership info | Section `id="mitglied"` | Edit `.member-item` list & `.fee-row` items |
-| Navigation links | `<nav>` and `.mobile-menu` | Edit the `<a>` tags |
-| Footer links | `<footer>` | Edit `.footer-links` |
-| Social media links | Footer `.footer-col` | Replace `#` with real URLs |
+### Add a slider photo
+1. Resize to 1920×1080px, compress to <400KB → save to `img/slider/`
+2. Add to `img/slider/images.json`:
+```json
+{"file": "slider5.jpg", "alt": "Beschreibung"}
+```
 
-### Quick GitHub edit (no coding needed)
-1. Go to your repo on github.com
-2. Click `index.html`
-3. Click the ✏️ pencil icon (top right)
-4. Make your changes
-5. Click **"Commit changes"** — site updates automatically in ~1 minute
+### Add/update a Vorstand photo
+Copy photo to `img/vorstand/` named exactly as in `vorstand.html` (e.g. `martin-klein.jpg`).
+Photos display uniformly in a padded white box — any original size works.
 
 ---
 
 ## 🖼 Image Guidelines
 
-Replace the placeholder Unsplash images with your own club photos.
-Use these resolutions for best quality + fast loading:
+| Location | Recommended size | Format | Max file size |
+|---|---|---|---|
+| Hero slider | 1920 × 1080 px | JPG 85% | 400 KB |
+| Parallax section | 1920 × 800 px | JPG 85% | 400 KB |
+| Gallery photos | any | JPG 80% | 300 KB |
+| Über uns (3 photos) | any (displayed at 170px height) | JPG 80% | 200 KB |
+| Vorstand photos | any (shown with padding in 220px frame) | JPG/PNG | 200 KB |
 
-| Location | Recommended size | Format |
-|---|---|---|
-| Hero slider (full screen) | 1920 × 1080 px | JPG, quality 85% |
-| Activity cards (large) | 800 × 600 px | JPG, quality 80% |
-| Event cards | 600 × 400 px | JPG, quality 80% |
-| Gallery strip | 400 × 300 px | JPG, quality 75% |
-| Welcome section (portrait) | 900 × 700 px | JPG, quality 80% |
-| Welcome section (accent) | 600 × 500 px | JPG, quality 80% |
-
-**How to replace an image:**
-Find the line `<img src="https://images.unsplash.com/...">` and replace the URL
-with either:
-- A relative path to your own image: `src="images/rheintour.jpg"`
-- Or upload your image to a free host like [https://imgbb.com](https://imgbb.com)
-  and use that URL
-
-**Free image compression tool:** [https://squoosh.app](https://squoosh.app)
-Drag your photo in, export as JPG at the sizes listed above.
+Compress all images at **[squoosh.app](https://squoosh.app)** before uploading.
 
 ---
 
-## 📱 Social Media
+## 📋 Current Status
 
-To add real social media links, find these placeholder lines in the footer
-and replace `#` with your actual URLs:
+### ✅ Live & working
+- Dynamic image slider + gallery (JSON-driven, no HTML editing needed for photos)
+- Club history timeline (Über uns) with 3 club photos
+- 6 activity cards (Kanadier, Kajak, Wildwasser, Schwimmen & Rollen, Sicherheitstraining, Wanderungen)
+- Termine 2026: 16 events in full calendar table
+- Photo strip + full gallery page with category filter + lightbox
+- Vorstand: 9 members with photos (uniform padded display)
+- Pegeldienste (all German states)
+- Impressum + Datenschutz (DSGVO compliant)
+- Privacy notice bar (no cookies)
+- SEO: sitemap.xml, robots.txt, Open Graph meta tags, favicons
+- Social: Instagram [@neuwieder_kanu_club](https://www.instagram.com/neuwieder_kanu_club/) + Facebook active
+- Domain: nkc-neuwied.de via Lansol → Cloudflare nameservers
 
-```html
-<a href="#">Instagram</a>   →   <a href="https://instagram.com/nkc_neuwied">Instagram</a>
-<a href="#">Facebook</a>    →   <a href="https://facebook.com/nkcneuwied">Facebook</a>
-```
+### 🔴 Still needed (legal)
+- **Impressum:** Vereinsregisternummer — club owner must provide and fill in
+
+### 🟡 Future / nice to have
+- Real membership fees (ask Kassenwart Richard Korscheid)
+- More gallery photos
+- YouTube channel link when created
+- Trip reports / news page (`berichte.html`)
 
 ---
 
-## 📄 Missing Pages (Future Work)
+## 📞 Contact & Handover
 
-The current site is a single-page homepage. These pages are recommended for the future:
+**Club contact:** martin.klein1979@web.de
+**Address:** Rheinstraße 56, 56564 Neuwied, Rhein-km 608
 
-| Page | File to create | Priority |
-|---|---|---|
-| Impressum | `impressum.html` | ✅ Done |
-| Datenschutzerklärung | `datenschutz.html` | ✅ Done |
-| Vorstand | `vorstand.html` | ✅ Done |
-| Pegeldienste | `pegeldienste.html` | ✅ Done |
-| Berichte / News | `berichte.html` | 🟡 Future (or use Instagram embed) |
-| Galerie | `galerie.html` | 🟢 Future (or use Instagram feed) |
-
-> **Important for Germany:** You are legally required to have an **Impressum**
-> and a **Datenschutzerklärung** on your website. See AGENTS.md for how to
-> create these with AI assistance.
+### Giving club members edit access
+1. GitHub repo → **Settings → Collaborators → Add**
+2. For events: edit only the `<tbody>` in `index.html`
+3. For photos: copy to folder + add line to `images.json`
+4. For bigger changes: paste `AGENTS.md` into [claude.ai](https://claude.ai)
 
 ---
 
@@ -146,28 +148,10 @@ The current site is a single-page homepage. These pages are recommended for the 
 
 | What | Tool |
 |---|---|
-| Language | Plain HTML + CSS + JavaScript |
+| Language | Plain HTML + CSS + JavaScript (no frameworks, no npm) |
 | Fonts | Google Fonts (Cormorant Garamond + Jost) |
-| Images | Unsplash (placeholder) → replace with own photos |
-| Map | OpenStreetMap (free, no API key needed) |
-| Hosting | Cloudflare Pages (free) |
-| Domain | IONOS (existing contract, expires Nov 2025) |
+| Images | Dynamic via `images.json` manifest files |
+| Map | OpenStreetMap (no API key needed) |
+| Hosting | Cloudflare Pages (free, unlimited bandwidth, DSGVO-compliant) |
+| Domain | nkc-neuwied.de at Lansol, nameservers → Cloudflare |
 | Version control | GitHub |
-
-No frameworks. No npm. No build step. Just one HTML file.
-
----
-
-## 🆘 Troubleshooting
-
-**Site not updating after push?**
-→ Check Cloudflare Pages dashboard → Deployments. Look for errors.
-
-**Domain not working?**
-→ DNS changes can take up to 24 hours. Be patient.
-
-**Images not loading?**
-→ Check the `src="..."` path. Relative paths need the file to be in the repo.
-
-**Need help?**
-→ Open `AGENTS.md` and follow the instructions to get AI assistance.
