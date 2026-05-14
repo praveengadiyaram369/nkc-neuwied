@@ -133,7 +133,7 @@ Compress all images at **[squoosh.app](https://squoosh.app)** before uploading.
 
 ## 📞 Contact & Handover
 
-**Club contact:** martin.klein1979@web.de
+**Club contact:** neuwieder.kanu.club@web.de
 **Address:** Rheinstraße 56, 56564 Neuwied, Rhein-km 608
 
 ### Giving club members edit access

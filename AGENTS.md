@@ -12,7 +12,7 @@ when you need help with the website.**
 
 - **Club:** Neuwieder Kanu-Club e.V.
 - **Location:** Rheinstraße 56, 56564 Neuwied, Rhein-km 608
-- **Email:** 1.Vorsitzender@nkc-neuwied.de
+- **Email:** neuwieder.kanu.club@web.de
 - **Domain:** nkc-neuwied.de
 - **Hosting:** Cloudflare Pages (free, deployed from GitHub)
 - **Repository:** https://github.com/praveengadiyaram369/nkc-neuwied

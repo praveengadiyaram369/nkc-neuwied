@@ -117,14 +117,27 @@ footer a:hover{color:var(--gold-lt)}
 </head>
 <body>
 
-<nav>
-  <div class="nav-logo">
-    <img src="logo.png" alt="NKC Logo"/>
-    <div class="nav-logo-text">Neuwieder Kanu-Club e.V.<span>Gegründet 1920</span></div>
-  </div>
-  <a href="index.html" class="nav-back">← Zurück zur Startseite</a>
-</nav>
-
+  <nav id="navbar" style="position:relative;background:rgba(15,54,96,.97);box-shadow:0 2px 30px rgba(0,0,0,.3)">
+    <div class="nav-logo" style="display:flex;align-items:center;gap:.8rem;flex-shrink:0">
+      <img src="logo.png" alt="NKC Neuwied Logo" style="height:44px;width:auto;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))"/>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:#fff;line-height:1.25">
+        Neuwieder Kanu-Club e.V.
+        <span style="display:block;font-size:.62rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);font-family:'Jost',sans-serif">Gegründet 1920 · Rhein km 608</span>
+      </div>
+    </div>
+    <ul style="display:flex;gap:1.4rem;list-style:none;align-items:center;margin-left:auto;flex-shrink:0">
+      <li><a href="index.html#ueber-uns" style="color:rgba(255,255,255,.82);font-size:.78rem;font-family:'Jost',sans-serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:none">Über uns</a></li>
+      <li><a href="index.html#aktivitaeten" style="color:rgba(255,255,255,.82);font-size:.78rem;font-family:'Jost',sans-serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:none">Aktivitäten</a></li>
+      <li><a href="galerie.html" style="color:rgba(255,255,255,.82);font-size:.78rem;font-family:'Jost',sans-serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:none">Galerie</a></li>
+      <li><a href="index.html#termine" style="color:rgba(255,255,255,.82);font-size:.78rem;font-family:'Jost',sans-serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:none">Termine</a></li>
+      <li><a href="index.html#mitglied" style="color:rgba(255,255,255,.82);font-size:.78rem;font-family:'Jost',sans-serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:none">Mitglied</a></li>
+      <li><a href="index.html#anfahrt" style="color:rgba(255,255,255,.82);font-size:.78rem;font-family:'Jost',sans-serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:none">Anfahrt</a></li>
+      <li><a href="vorstand.html" style="color:rgba(255,255,255,.82);font-size:.78rem;font-family:'Jost',sans-serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:none">Vorstand</a></li>
+      <li><a href="pegeldienste.html" style="color:rgba(255,255,255,.82);font-size:.78rem;font-family:'Jost',sans-serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:none">Pegel</a></li>
+      <li><a href="https://www.kanu-efb.de/" target="_blank" rel="noopener" style="color:rgba(255,255,255,.82);font-size:.78rem;font-family:'Jost',sans-serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:none">eFB</a></li>
+      <li><a href="index.html#kontakt" style="background:#cc2f26;color:#fff;padding:.48rem 1.2rem;border-radius:2px;font-size:.78rem;font-family:'Jost',sans-serif;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none">Kontakt</a></li>
+    </ul>
+  </nav>
 <div class="hero-bar">
   <p class="page-label">Fotos &amp; Eindrücke</p>
   <h1>Der NKC in <em>Bildern</em>.</h1>
@@ -175,7 +188,7 @@ footer a:hover{color:var(--gold-lt)}
 </div>
 
 <footer>
-  © 2025 Neuwieder Kanu-Club e.V. —
+  © 2026 Neuwieder Kanu-Club e.V. —
   <a href="index.html">Startseite</a> ·
   <a href="impressum.html">Impressum</a> ·
   <a href="datenschutz.html">Datenschutz</a>
