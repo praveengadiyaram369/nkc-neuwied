@@ -35,12 +35,6 @@ nav{background:var(--blue-nav);padding:0 2.5rem;height:68px;display:flex;align-i
 .hero-bar h1 em{font-style:italic;color:var(--gold-lt)}
 .hero-bar p{font-size:.95rem;font-weight:300;color:rgba(255,255,255,.75);margin-top:.8rem;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.75}
 
-/* FILTER TABS */
-.filter-bar{background:#fff;border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.06)}
-.filter-btn{font-family:'Jost',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:.45rem 1.1rem;border-radius:2px;cursor:pointer;transition:all .2s;border:1.5px solid var(--border);background:transparent;color:var(--blue)}
-.filter-btn:hover{border-color:var(--blue);background:rgba(42,122,191,.06)}
-.filter-btn.active{background:var(--blue);color:#fff;border-color:var(--blue)}
-
 /* GALLERY GRID */
 .gallery-content{max-width:1200px;margin:0 auto;padding:2.5rem 1.5rem 5rem}
 .gallery-grid{
@@ -75,7 +69,6 @@ nav{background:var(--blue-nav);padding:0 2.5rem;height:68px;display:flex;align-i
   text-shadow:0 2px 8px rgba(0,0,0,.5);
 }
 .gallery-item:hover .item-zoom{transform:translate(-50%,-50%) scale(1)}
-.gallery-item[data-cat].hidden{display:none}
 .gallery-count{font-size:.8rem;color:#5a7080;font-weight:300;text-align:center;margin-bottom:2rem}
 
 /* SOCIAL NOTE */
@@ -119,7 +112,7 @@ footer a:hover{color:var(--gold-lt)}
 
   <nav id="navbar" style="position:relative;background:rgba(15,54,96,.97);box-shadow:0 2px 30px rgba(0,0,0,.3)">
     <a href="index.html" class="nav-logo" style="display:flex;align-items:center;gap:.8rem;flex-shrink:0;text-decoration:none">
-      <img src="logo.png" alt="NKC Neuwied Logo" style="height:44px;width:auto;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))"/>
+      <img src="img/logo.png" alt="NKC Neuwied Logo" style="height:44px;width:auto;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))"/>
       <div style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:#fff;line-height:1.25">
         Neuwieder Kanu-Club e.V.
         <span style="display:block;font-size:.62rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);font-family:'Jost',sans-serif">Gegründet 1920 · Rhein km 608</span>
@@ -144,15 +137,6 @@ footer a:hover{color:var(--gold-lt)}
   <p>Touren, Training, Jugend und Vereinsleben — echte Momente vom Rhein und unseren Fahrten.</p>
 </div>
 
-<!-- Filter tabs -->
-<div class="filter-bar">
-  <button class="filter-btn active" onclick="filterGallery('all', this)">Alle</button>
-  <button class="filter-btn" onclick="filterGallery('touren', this)">Touren</button>
-  <button class="filter-btn" onclick="filterGallery('training', this)">Training</button>
-  <button class="filter-btn" onclick="filterGallery('jugend', this)">Jugend</button>
-  <button class="filter-btn" onclick="filterGallery('bootshaus', this)">Bootshaus</button>
-  <button class="filter-btn" onclick="filterGallery('events', this)">Events</button>
-</div>
 
 <div class="gallery-content">
 
@@ -249,12 +233,6 @@ footer a:hover{color:var(--gold-lt)}
     const label = cat === 'all' ? `Alle ${visibleImages.length} Fotos` :
       `${visibleImages.length} Foto${visibleImages.length !== 1 ? 's' : ''}`;
     document.getElementById('galleryCount').textContent = label;
-  }
-
-  function filterGallery(cat, btn) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderGallery(cat);
   }
 
   // Lightbox

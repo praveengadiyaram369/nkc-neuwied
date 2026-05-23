@@ -1,4 +1,4 @@
-# 🛶 Neuwieder Kanu-Club e.V. — Website
+# Neuwieder Kanu-Club e.V. — Website
 
 Official website for **Neuwieder Kanu-Club e.V.**, hosted for free on **Cloudflare Pages**.
 
@@ -7,50 +7,54 @@ Official website for **Neuwieder Kanu-Club e.V.**, hosted for free on **Cloudfla
 
 ---
 
-## 🗂 Project Structure
+## Project Structure
 
 ```
 nkc-neuwied/
-├── index.html            ← Main homepage
-├── galerie.html          ← Photo gallery (dynamic, filter by category)
-├── vorstand.html         ← Board members with photos
-├── pegeldienste.html     ← Water level links by German state
-├── impressum.html        ← Legal imprint (required in Germany)
-├── datenschutz.html      ← Privacy policy / DSGVO
-├── 404.html              ← Friendly error page
-├── sitemap.xml           ← SEO sitemap
-├── robots.txt            ← Search engine instructions
-├── favicon.ico / favicon-32.png / favicon-16.png / apple-touch-icon.png
-├── logo.png              ← Club logo transparent PNG (used in site)
-├── logo.jpeg             ← Original logo backup
+├── index.html              ← Main homepage
+├── galerie.html            ← Photo gallery (lightbox, all photos shown)
+├── vorstand.html           ← Board members with photos
+├── pegeldienste.html       ← Water level links by German state
+├── impressum.html          ← Legal imprint (required in Germany)
+├── datenschutz.html        ← Privacy policy / DSGVO
+├── 404.html                ← Friendly error page
+├── sitemap.xml             ← SEO sitemap
+├── robots.txt              ← Search engine instructions
+├── favicon.ico             ← Browser favicon
+├── favicon-32.png          ← Favicon 32×32
+├── apple-touch-icon.png    ← iOS home screen icon
+├── docs/
+│   └── NKC-Einwilligungserklaerung-Medien.docx  ← Media consent form
 │
 └── img/
+    ├── logo.png            ← Club logo (transparent PNG)
+    ├── parallax.jpg        ← Full-width parallax background
+    ├── nkc-video.mp4       ← Club video
     ├── slider/
-    │   ├── images.json   ← ⭐ Edit to add/remove slider photos
-    │   └── slider1.jpg, slider2.jpg, ...
+    │   ├── images.json     ← ⭐ Edit to add/remove hero slider photos
+    │   └── slider1.jpg … slider5.jpg
     ├── gallery/
-    │   ├── images.json   ← ⭐ Edit to add/remove gallery photos
-    │   └── gallery1.jpg, gallery2.jpg, ...
-    ├── vorstand/
-    │   ├── martin-klein.jpg
-    │   ├── klaus-heyduczek.png
-    │   ├── rainer-molitor.png
-    │   ├── richard-korscheid.jpg
-    │   ├── volker-robbert.jpg
-    │   ├── benjamin-klein.png
-    │   ├── casper-sklenar.png
-    │   ├── dominik-bolz.png
-    │   └── Jennifer.png        ← Antje Saebel (Beisitzerin)
-    ├── old_homepage/
-    │   ├── nkc1.jpg            ← Über uns image 1
-    │   ├── nkc2.jpg            ← Über uns image 2
-    │   └── nkc3.jpg            ← Über uns image 3
-    └── parallax.jpg            ← Full-width parallax background
+    │   ├── images.json     ← ⭐ Edit to add/remove gallery photos
+    │   └── gallery1.jpg … gallery27.jpg
+    ├── about/
+    │   ├── nkc1.jpg        ← Über uns photo 1
+    │   ├── nkc2.jpg        ← Über uns photo 2
+    │   └── nkc3.jpg        ← Über uns photo 3
+    └── vorstand/
+        ├── martin-klein.jpg
+        ├── klaus-heyduczek.png
+        ├── rainer-molitor.png
+        ├── richard-korscheid.jpg
+        ├── volker-robbert.jpg
+        ├── benjamin-klein.png
+        ├── casper-sklenar.png
+        ├── dominik-bolz.png
+        └── Jennifer.png    ← Antje Saebel (Beisitzerin)
 ```
 
 ---
 
-## 🚀 Deployment & Cache
+## Deployment & Cache
 
 Site deploys automatically on every `git push` via Cloudflare Pages (~60 seconds).
 
@@ -62,7 +66,7 @@ Site deploys automatically on every `git push` via Cloudflare Pages (~60 seconds
 
 ---
 
-## ✏️ Most Common Updates
+## Most Common Updates
 
 ### Update events (Termine)
 1. Open `index.html` on GitHub → click ✏️
@@ -73,15 +77,14 @@ Site deploys automatically on every `git push` via Cloudflare Pages (~60 seconds
 1. Compress photo at [squoosh.app](https://squoosh.app) → save to `img/gallery/`
 2. Add one line to `img/gallery/images.json`:
 ```json
-{"file": "myphoto.jpg", "alt": "Beschreibung", "cat": "touren"}
+{"file": "myphoto.jpg", "alt": "Beschreibung"}
 ```
-Categories: `touren` · `training` · `bootshaus` · `events`
 
 ### Add a slider photo
 1. Resize to 1920×1080px, compress to <400KB → save to `img/slider/`
 2. Add to `img/slider/images.json`:
 ```json
-{"file": "slider5.jpg", "alt": "Beschreibung"}
+{"file": "slider6.jpg", "alt": "Beschreibung"}
 ```
 
 ### Add/update a Vorstand photo
@@ -90,7 +93,7 @@ Photos display uniformly in a padded white box — any original size works.
 
 ---
 
-## 🖼 Image Guidelines
+## Image Guidelines
 
 | Location | Recommended size | Format | Max file size |
 |---|---|---|---|
@@ -104,14 +107,14 @@ Compress all images at **[squoosh.app](https://squoosh.app)** before uploading.
 
 ---
 
-## 📋 Current Status
+## Current Status
 
-### ✅ Live & working
+### Live & working
 - Dynamic image slider + gallery (JSON-driven, no HTML editing needed for photos)
 - Club history timeline (Über uns) with 3 club photos
 - 6 activity cards (Kanadier, Kajak, Wildwasser, Schwimmen & Rollen, Sicherheitstraining, Wanderungen)
-- Termine 2026: 16 events in full calendar table
-- Photo strip + full gallery page with category filter + lightbox
+- Termine 2026: events in full calendar table
+- Photo gallery page with lightbox
 - Vorstand: 9 members with photos (uniform padded display)
 - Pegeldienste (all German states)
 - Impressum + Datenschutz (DSGVO compliant)
@@ -120,10 +123,10 @@ Compress all images at **[squoosh.app](https://squoosh.app)** before uploading.
 - Social: Instagram [@neuwieder_kanu_club](https://www.instagram.com/neuwieder_kanu_club/) + Facebook active
 - Domain: nkc-neuwied.de via Lansol → Cloudflare nameservers
 
-### 🔴 Still needed (legal)
+### Still needed (legal)
 - **Impressum:** Vereinsregisternummer — club owner must provide and fill in
 
-### 🟡 Future / nice to have
+### Future / nice to have
 - Real membership fees (ask Kassenwart Richard Korscheid)
 - More gallery photos
 - YouTube channel link when created
@@ -131,7 +134,7 @@ Compress all images at **[squoosh.app](https://squoosh.app)** before uploading.
 
 ---
 
-## 📞 Contact & Handover
+## Contact & Handover
 
 **Club contact:** neuwieder.kanu.club@web.de
 **Address:** Rheinstraße 56, 56564 Neuwied, Rhein-km 608
@@ -144,7 +147,7 @@ Compress all images at **[squoosh.app](https://squoosh.app)** before uploading.
 
 ---
 
-## 🔧 Tech Stack
+## Tech Stack
 
 | What | Tool |
 |---|---|
